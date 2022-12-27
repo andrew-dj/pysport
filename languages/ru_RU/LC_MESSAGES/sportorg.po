@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: SportOrg\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-12 11:13+0300\n"
-"PO-Revision-Date: 2022-07-13 14:41+0500\n"
+"PO-Revision-Date: 2022-12-17 22:22+0400\n"
 "Last-Translator: SportOrg\n"
 "Language-Team: SportOrg\n"
 "Language: ru_RU\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Loco-Source-Locale: ru_RU\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Loco-Parser: loco_parse_po\n"
 "X-Poedit-Basepath: ../../../sportorg\n"
@@ -20,6 +20,14 @@ msgstr ""
 
 msgid "About"
 msgstr "О нас"
+
+msgid "Alpine skiing mode"
+msgstr "Режим горнолыжных соревнований"
+
+
+msgid "on/off RFID SkiSport readout"
+msgstr "Режим cчитывания времени SkiSport"
+
 
 msgid "Contributors"
 msgstr "Разработчики"
@@ -667,8 +675,7 @@ msgid "scores formula"
 msgstr "расчет очков по формуле"
 
 msgid "scores formula hint"
-msgstr ""
-"Составьте произвольную формулу. Поддерживаются переменные: \n"
+msgstr "Составьте произвольную формулу. Поддерживаются переменные: \n"
 " leader - результат победителя группы; \n"
 " time - результат участника"
 
@@ -1501,7 +1508,7 @@ msgid "Ignore readout before start"
 msgstr "Игнорировать считывание до старта"
 
 msgid "Ignore readout before start"
-msgstr "Игнорировать считывание до старта"
+msgstr ""
 
 msgid "Did not start"
 msgstr "НЕ СТАРТ."
@@ -1511,3 +1518,4 @@ msgstr "СОШЕЛ"
 
 msgid "Disqualified"
 msgstr "ДИСКВ."
+

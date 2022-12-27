@@ -340,9 +340,9 @@ def menu_list():
                     'action': 'SFRReadoutAction',
                 },
                 {
-                    'title': translate('on/off RFID Impinj readout'),
+                    'title': translate('on/off RFID SkiSport readout'),
                     'icon': config.icon_dir('rfid_impinj.png'),
-                    'action': 'ImpinjReadoutAction'
+                    'action': 'SkiSportReadoutAction'
                 },
                 {
                    'title': translate('Teamwork'),
@@ -368,6 +368,7 @@ def menu_list():
                     'actions': [
                         {
                             'title': translate('Send results'),
+                            'shortcut': 'Ctrl+T',
                             'tabs': [1],
                             'action': 'TelegramSendAction',
                         },

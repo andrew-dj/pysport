@@ -73,6 +73,10 @@ class MainTab(Tab):
         self.item_save_in_utf8.setChecked(Config().configuration.get('save_in_utf8', False))
         self.layout.addRow(self.item_save_in_utf8)
 
+        self.item_alpine_skiing_mode = QCheckBox(translate('Alpine skiing mode'))
+        self.item_alpine_skiing_mode.setChecked(Config().configuration.get('alpine_skiing_mode'))
+        self.layout.addRow(self.item_alpine_skiing_mode)
+
         self.widget.setLayout(self.layout)
 
     def save(self):
@@ -96,6 +100,7 @@ class MainTab(Tab):
         Config().configuration.set('use_birthday', self.item_use_birthday.isChecked())
         Config().configuration.set('check_updates', self.item_check_updates.isChecked())
         Config().configuration.set('save_in_utf8', self.item_save_in_utf8.isChecked())
+        Config().configuration.set('alpine_skiing_mode', self.item_alpine_skiing_mode.isChecked())
 
 
 class SoundTab(Tab):

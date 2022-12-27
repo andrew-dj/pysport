@@ -8,7 +8,7 @@ python:
 install:
   - pip install poetry codecov
   - poetry install
-  - cp .env.example .env
+  - cp .env .env
 
 script:
   - make test lint

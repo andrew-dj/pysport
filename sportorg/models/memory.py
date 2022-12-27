@@ -33,6 +33,7 @@ class SystemType(Enum):
     SFR = 3
     SPORTIDUINO = 4
     RFID_IMPINJ = 5
+    SKISPORT = 6 #TODO New timing system
 
     def __str__(self):
         return self._name_

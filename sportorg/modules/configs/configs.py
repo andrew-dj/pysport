@@ -80,7 +80,8 @@ class Config(metaclass=Singleton):
                 'check_updates': True,
                 'autosave_interval': 0,
                 'logging_level': 'INFO',
-                'log_window_row_count': 1000
+                'log_window_row_count': 1000,
+                'alpine_skiing_mode': False
             }),
             ConfigFile.SOUND: Configurations({
                 'enabled': False,
