@@ -433,11 +433,12 @@ class Result:
     def __init__(self):
         if type(self) == Result:
             raise Exception('<Result> is abstracted')
+
+        self.finish_time = None
         self.id = uuid.uuid4()
         self.days = 0
         self.bib = 0
         self.start_time = None  # type: OTime
-        self.finish_time = OTime.now()  # type: OTime
         self.person = None  # type: Person
         self.status = ResultStatus.OK
         self.status_comment = ''
@@ -711,8 +712,10 @@ class Result:
     def get_finish_time(self):
         if self.finish_time:
             return self.finish_time
-
-        return OTime.now()
+        if race().is_alpine_skiing_mode():
+            return OTime.now().replace(day=0, hour=0, minute=0, sec=0, msec=0) #now()
+        else:
+            return OTime.now()
 
     def get_penalty_time(self):
         if self.penalty_time:

@@ -220,7 +220,25 @@ class PersonMemoryModel(AbstractSportOrgMemoryModel):
         self.init_cache()
 
     def get_headers(self):
-        return [
+        if race().is_alpine_skiing_mode():
+            headers_list = [
+            translate('Last name'),
+            translate('First name'),
+            translate('Qualification title'),
+            translate('Group'),
+            translate('Team'),
+            translate('Year title'),
+            translate('Bib'),
+            translate('Card title'),
+            translate('Rented card'),
+            translate('Comment'),
+            translate('World code title'),
+            translate('National code title'),
+            translate('Out of competition title'),
+            translate('Result count title'),
+        ]
+        else:
+            headers_list = [
             translate('Last name'),
             translate('First name'),
             translate('Qualification title'),
@@ -238,6 +256,7 @@ class PersonMemoryModel(AbstractSportOrgMemoryModel):
             translate('Out of competition title'),
             translate('Result count title'),
         ]
+        return headers_list
 
     def init_cache(self):
         self.cache.clear()
@@ -260,41 +279,73 @@ class PersonMemoryModel(AbstractSportOrgMemoryModel):
         person = obj
 
         is_rented_card = person.is_rented_card or RentCards().exists(person.card_number)
+        if race().is_alpine_skiing_mode():
+            ret.append(person.surname)
+            ret.append(person.name)
+            if person.qual:
+                ret.append(person.qual.get_title())
+            else:
+                ret.append('')
+            if person.group:
+                ret.append(person.group.name)
+            else:
+                ret.append('')
+            if person.organization:
+                ret.append(person.organization.name)
+            else:
+                ret.append('')
+            ret.append(person.get_year())
+            ret.append(person.bib)
+            ret.append(person.card_number)
+            ret.append(
+                translate('Rented card') if is_rented_card else translate(
+                    'Rented stub')
+            )
+            ret.append(person.comment)
+            ret.append(str(person.world_code) if person.world_code else '')
+            ret.append(
+                str(person.national_code) if person.national_code else '')
 
-        ret.append(person.surname)
-        ret.append(person.name)
-        if person.qual:
-            ret.append(person.qual.get_title())
+            out_of_comp_status = ''
+            if person.is_out_of_competition:
+                out_of_comp_status = translate('o/c')
+            ret.append(out_of_comp_status)
+            ret.append(person.result_count)
         else:
-            ret.append('')
-        if person.group:
-            ret.append(person.group.name)
-        else:
-            ret.append('')
-        if person.organization:
-            ret.append(person.organization.name)
-        else:
-            ret.append('')
-        ret.append(person.get_year())
-        ret.append(person.bib)
-        if person.start_time:
-            ret.append(time_to_hhmmss(person.start_time))
-        else:
-            ret.append('')
-        ret.append(person.start_group)
-        ret.append(person.card_number)
-        ret.append(
-            translate('Rented card') if is_rented_card else translate('Rented stub')
-        )
-        ret.append(person.comment)
-        ret.append(str(person.world_code) if person.world_code else '')
-        ret.append(str(person.national_code) if person.national_code else '')
+            ret.append(person.surname)
+            ret.append(person.name)
+            if person.qual:
+                ret.append(person.qual.get_title())
+            else:
+                ret.append('')
+            if person.group:
+                ret.append(person.group.name)
+            else:
+                ret.append('')
+            if person.organization:
+                ret.append(person.organization.name)
+            else:
+                ret.append('')
+            ret.append(person.get_year())
+            ret.append(person.bib)
+            if person.start_time:
+                ret.append(time_to_hhmmss(person.start_time))
+            else:
+                ret.append('')
+            ret.append(person.start_group)
+            ret.append(person.card_number)
+            ret.append(
+                translate('Rented card') if is_rented_card else translate('Rented stub')
+            )
+            ret.append(person.comment)
+            ret.append(str(person.world_code) if person.world_code else '')
+            ret.append(str(person.national_code) if person.national_code else '')
 
-        out_of_comp_status = ''
-        if person.is_out_of_competition:
-            out_of_comp_status = translate('o/c')
-        ret.append(out_of_comp_status)
-        ret.append(person.result_count)
+            out_of_comp_status = ''
+            if person.is_out_of_competition:
+                out_of_comp_status = translate('o/c')
+            ret.append(out_of_comp_status)
+            ret.append(person.result_count)
 
         return ret
 
@@ -312,7 +363,24 @@ class ResultMemoryModel(AbstractSportOrgMemoryModel):
         self.count = None
 
     def get_headers(self):
-        return [
+        if race().is_alpine_skiing_mode():
+            headers_list = [
+            translate('Bib'),
+            translate('Last name'),
+            translate('First name'),
+            translate('Group'),
+            translate('Team'),
+            translate('Card title'),
+            translate('First run'),
+            translate('Second run'),
+            translate('Result'),
+            translate('Status'),
+            translate('Place'),
+            translate('Type'),
+            translate('Rented card'),
+        ]
+        else:
+            headers_list = [
             translate('Last name'),
             translate('First name'),
             translate('Group'),
@@ -330,6 +398,7 @@ class ResultMemoryModel(AbstractSportOrgMemoryModel):
             translate('Type'),
             translate('Rented card'),
         ]
+        return headers_list
 
     def init_cache(self):
         self.cache.clear()
@@ -381,8 +450,24 @@ class ResultMemoryModel(AbstractSportOrgMemoryModel):
         if i.get_finish_time():
             time_accuracy = self.race.get_setting('time_accuracy', 0)
             finish = i.get_finish_time().to_str(time_accuracy)
-
-        return [
+        if race().is_alpine_skiing_mode():
+            results_list = [
+            bib,
+            last_name,
+            first_name,
+            group,
+            team,
+            i.card_number,
+            finish,
+            time_to_hhmmss(i.get_penalty_time()),
+            i.get_result(),
+            i.status.get_title(),
+            i.get_place(),
+            str(i.system_type),
+            rented_card,
+        ]
+        else:
+            results_list = [
             last_name,
             first_name,
             group,
@@ -400,6 +485,7 @@ class ResultMemoryModel(AbstractSportOrgMemoryModel):
             str(i.system_type),
             rented_card,
         ]
+        return results_list
 
     def get_source_array(self):
         return self.race.results
