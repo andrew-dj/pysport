@@ -45,7 +45,7 @@ class AboutDialog(QDialog):
         home_page_text = QLabel()
         home_page_text.setText(
             '\n{0}: <a href="{1}">{1}</a>'.format(
-                translate('Home page'), 'https://sportorg.github.io/pysport/'
+                translate('Home page'), 'https://github.com/andrew-dj/pysport'
             )
         )
         home_page_text.setOpenExternalLinks(True)
