@@ -101,6 +101,11 @@ def time_to_hhmmss(value):
     return time_.strftime('%H:%M:%S')
 
 
+def time_to_mmsszzz(value):
+    time_ = time_to_datetime(value)
+    return time_.strftime('%M:%S:%f')
+
+
 def hhmmss_to_time(value):
     arr = str(value).split(':')
     if len(arr) == 3:

@@ -71,6 +71,7 @@ class RaceType(_TitleType):
     RELAY = 3
     # ONE_MAN_RELAY = 4
     # SPRINT_RELAY = 5
+    ALPINE_SKIING = 6
 
 
 class ResultStatus(_TitleType):
@@ -284,6 +285,7 @@ class Group(Model):
         self.ranking = Ranking()
         self.__type = None  # type: RaceType
         self.relay_legs = 0
+        self.alpine_ski_runs = 1
 
     def __repr__(self):
         return 'Group {}'.format(self.name)
@@ -313,6 +315,9 @@ class Group(Model):
     def is_relay(self):
         return self.get_type() == RaceType.RELAY
 
+    def is_alpine_skiing(self):
+        return self.get_type() == RaceType.ALPINE_SKIING
+
     def to_dict(self):
         return {
             'object': self.__class__.__name__,
@@ -337,6 +342,7 @@ class Group(Model):
             '__type': self.__type.value if self.__type else None,
             'relay_legs': self.relay_legs,
             'sex': 0,
+            'alpine_ski_runs': self.alpine_ski_runs
         }
 
     def update_data(self, data):
@@ -599,7 +605,7 @@ class Result:
         if race().get_setting('result_processing_mode', 'time') == 'scores':
             ret += str(self.scores_rogain) + ' ' + translate('points') + ' '
 
-        time_accuracy = race().get_setting('time_accuracy', 0)
+        time_accuracy = race().get_setting('time_accuracy', 2)
         ret += self.get_result_otime().to_str(time_accuracy)
         return ret
 
@@ -1211,6 +1217,7 @@ class RaceData(Model):
         self.start_datetime = None  # type: datetime
         self.end_datetime = None  # type: datetime
         self.relay_leg_count = 3
+        self.alpine_skiing_runs = 0
 
     def __repr__(self):
         return 'Race {}'.format(self.title)
@@ -1244,6 +1251,7 @@ class RaceData(Model):
             'start_datetime': str(self.start_datetime) if self.start_datetime else None,
             'end_datetime': str(self.end_datetime) if self.end_datetime else None,
             'relay_leg_count': self.relay_leg_count,
+            'alpine_skiing_runs': self.alpine_skiing_runs,
         }
 
     def update_data(self, data):
@@ -1259,6 +1267,7 @@ class RaceData(Model):
             self.start_datetime = dateutil.parser.parse(data['start_datetime'])
         if data['end_datetime']:
             self.end_datetime = dateutil.parser.parse(data['end_datetime'])
+        self.alpine_skiing_runs = int(data['alpine_skiing_runs'])
 
 
 class Race(Model):
@@ -1599,6 +1608,11 @@ class Race(Model):
 
     def is_relay(self):
         if self.data.race_type == RaceType.RELAY:
+            return True
+        return False
+
+    def is_alpine_skiing_mode(self):
+        if self.data.race_type == RaceType.ALPINE_SKIING:
             return True
         return False
 

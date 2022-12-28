@@ -44,6 +44,8 @@ class ResultEditDialog(QDialog):
         time_accuracy = race().get_setting('time_accuracy', 0)
         if time_accuracy:
             self.time_format = 'hh:mm:ss.zzz'
+            if race().is_alpine_skiing_mode():
+                self.time_format = 'mm:ss:zzz'
 
     def exec_(self):
         self.init_ui()
@@ -62,7 +64,7 @@ class ResultEditDialog(QDialog):
         vertical_layout = QVBoxLayout(self)
         scroll_area = QScrollArea()
         content_widget = QWidget()
-
+        alpine_skiing_mode = race().is_alpine_skiing_mode()
         form_layout = QFormLayout(content_widget)
 
         self.item_created_at = AdvTimeEdit(display_format=self.time_format)
@@ -110,14 +112,22 @@ class ResultEditDialog(QDialog):
         form_layout.addRow(QLabel(''), self.label_person_info)
         if more24:
             form_layout.addRow(QLabel(translate('Days')), self.item_days)
-        form_layout.addRow(QLabel(translate('Start')), self.item_start)
-        form_layout.addRow(QLabel(translate('Finish')), self.item_finish)
-        form_layout.addRow(QLabel(translate('Credit')), self.item_credit)
-        form_layout.addRow(QLabel(translate('Penalty')), self.item_penalty)
-        form_layout.addRow(QLabel(translate('Penalty legs')), self.item_penalty_laps)
-        form_layout.addRow(QLabel(translate('Result')), self.item_result)
-        form_layout.addRow(QLabel(translate('Status')), self.item_status)
-        form_layout.addRow(QLabel(translate('Comment')), self.item_status_comment)
+        if not alpine_skiing_mode:
+            form_layout.addRow(QLabel(translate('Start')), self.item_start)
+            form_layout.addRow(QLabel(translate('Finish')), self.item_finish)
+            form_layout.addRow(QLabel(translate('Credit')), self.item_credit)
+            form_layout.addRow(QLabel(translate('Penalty')), self.item_penalty)
+            form_layout.addRow(QLabel(translate('Penalty legs')), self.item_penalty_laps)
+            form_layout.addRow(QLabel(translate('Result')), self.item_result)
+            form_layout.addRow(QLabel(translate('Status')), self.item_status)
+            form_layout.addRow(QLabel(translate('Comment')), self.item_status_comment)
+        if alpine_skiing_mode:
+            form_layout.addRow(QLabel(translate('First run')), self.item_finish)
+            form_layout.addRow(QLabel(translate('Second run')), self.item_penalty)
+            form_layout.addRow(QLabel(translate('Result')), self.item_result)
+            form_layout.addRow(QLabel(translate('Status')), self.item_status)
+            form_layout.addRow(QLabel(translate('Comment')),
+                               self.item_status_comment)
 
         if self.current_object.is_punch():
             start_source = race().get_setting('system_start_source', 'protocol')

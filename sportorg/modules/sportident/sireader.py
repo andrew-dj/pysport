@@ -263,6 +263,13 @@ class SIReaderClient(object):
                 for f in os.listdir('/dev')
                 if re.match('ttyS.*|ttyUSB.*', f)
             ]
+            # TODO: check if port scan in darwin (MacOS) is correct
+        elif platform.system() == 'Darwin':
+            scan_ports = [
+                os.path.join('/dev', f)
+                for f in os.listdir('/dev')
+                if re.match('ttyS.*|ttyUSB.*', f)
+            ]
         elif platform.system() == 'Windows':
             scan_ports = ['COM' + str(i) for i in range(48)]
 

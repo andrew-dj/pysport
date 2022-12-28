@@ -10,7 +10,7 @@ from sportorg.gui.tabs.memory_model import ResultMemoryModel
 from sportorg.gui.tabs.table import TableView
 from sportorg.language import translate
 from sportorg.models.memory import race
-from sportorg.utils.time import time_to_hhmmss
+from sportorg.utils.time import time_to_hhmmss, time_to_mmsszzz
 
 
 class ResultsTable(TableView):
@@ -66,6 +66,7 @@ class ResultsTable(TableView):
 class Widget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
+        self.race = race()
         self.result_card_form = QtWidgets.QFormLayout()
         self.result_course_form = QtWidgets.QFormLayout()
         self.grid_layout = QtWidgets.QGridLayout(self)
@@ -96,7 +97,7 @@ class Widget(QtWidgets.QWidget):
 
     def setup_ui(self):
         self.result_splitter.setOrientation(QtCore.Qt.Horizontal)
-        self.result_detail_part.setMaximumSize(QtCore.QSize(350, 16777215))
+        self.result_detail_part.setMaximumSize(QtCore.QSize(0, 16777215)) #TODO centralize settings for alpine skiing. 0 is no splits
         self.result_detail_part.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.result_detail_part.setFrameShadow(QtWidgets.QFrame.Raised)
         self.vertical_layout_course.setContentsMargins(0, 0, 0, 0)
@@ -208,10 +209,16 @@ class Widget(QtWidgets.QWidget):
 
             self.result_card_details.append(s)
             code = split.code
-
-        self.result_card_finish_edit.setText(time_to_hhmmss(result.get_finish_time()))
-        self.result_card_start_edit.setText(time_to_hhmmss(result.get_start_time()))
-
+        if not race().is_alpine_skiing_mode():
+            self.result_card_finish_edit.setText(time_to_hhmmss(result.get_finish_time()))
+            self.result_card_start_edit.setText(time_to_hhmmss(result.get_start_time()))
+        else:
+            print("Alpine Skiing Mode")
+            print(race().is_alpine_skiing_mode())
+            self.result_card_finish_edit.setText(
+                time_to_mmsszzz(result.get_finish_time()))
+            self.result_card_start_edit.setText(
+                time_to_mmsszzz(result.get_start_time()))
         split_codes = []
         for split in result.splits:
             split_codes.append(split.code)

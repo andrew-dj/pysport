@@ -106,19 +106,6 @@ class PersonEditDialog(BaseDialog):
                 object=person,
                 key='national_code',
             ),
-            TimeField(
-                title=translate('Start time'),
-                object=person,
-                key='start_time',
-                format=time_format,
-            ),
-            NumberField(
-                title=translate('Start group'),
-                object=person,
-                key='start_group',
-                minimum=0,
-                maximum=99,
-            ),
             NumberField(
                 title=translate('Punch card #'),
                 object=person,

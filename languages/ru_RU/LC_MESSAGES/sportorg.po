@@ -21,9 +21,17 @@ msgstr ""
 msgid "About"
 msgstr "О нас"
 
+msgid "ALPINE_SKIING"
+msgstr "Горнолыжные соревнования"
+
 msgid "Alpine skiing mode"
 msgstr "Режим горнолыжных соревнований"
 
+msgid "First run"
+msgstr "Первая попытка"
+
+msgid "Second run"
+msgstr "Вторая попытка"
 
 msgid "on/off RFID SkiSport readout"
 msgstr "Режим cчитывания времени SkiSport"
