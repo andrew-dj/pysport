@@ -476,7 +476,6 @@ class ManualFinishAction(Action, metaclass=ActionFactory):
         result = race().new_result(ResultManual)
         Teamwork().send(result.to_dict())
         live_client.send(result)
-        telegram_client.send(result) #TODO Check appropriate call place
         race().add_new_result(result)
         logging.info(translate('Manual finish'))
         self.app.refresh()

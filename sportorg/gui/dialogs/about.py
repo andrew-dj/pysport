@@ -37,7 +37,7 @@ class AboutDialog(QDialog):
         contributors_text.setText(
             '\n{}:{}'.format(
                 translate('Contributors'),
-                '\n\t- Danil Akhtarov,\n\t- Sergei Kobelev,\n\t- Semyon Yakimov,\n\t- Konstantin Bats.',
+                '\n\t- Danil Akhtarov,\n\t- Sergei Kobelev,\n\t- Semyon Yakimov,\n\t- Konstantin Bats, \n\t- Andrey Bulynin (forked by).',
             )
         )
         self.layout.addRow(contributors_text)

@@ -49,6 +49,20 @@ class TelegramDialog(QDialog):
         self.item_template.setMinimumHeight(150)
         self.layout.addRow(self.label_template, self.item_template)
 
+        self.help_text = QTextEdit()
+        self.help_text.setStyleSheet('QScrollBar:vertical {background: #bfbfbf}')
+        self.help_text.setMinimumHeight(220)
+        self.help_text.setMaximumHeight(220)
+        self.help_text.setReadOnly(True)
+        self.help_text.setText(
+            """
+        Для первой попытки: {bib} - {name} - результат первой попытки: {result}
+        
+        Для второй попытки {bib} - {name} -  результат второй попытки: {penalty_time}, общее время: {result}
+            """
+        )
+        self.layout.addRow(self.help_text)
+
         self.item_enabled = QCheckBox(translate('Enabled'))
         self.layout.addRow(self.item_enabled)
 

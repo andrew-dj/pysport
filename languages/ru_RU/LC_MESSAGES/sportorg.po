@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: SportOrg\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-12 11:13+0300\n"
-"PO-Revision-Date: 2022-12-17 22:22+0400\n"
+"PO-Revision-Date: 2022-12-28 21:27+0300\n"
 "Last-Translator: SportOrg\n"
 "Language-Team: SportOrg\n"
 "Language: ru_RU\n"
@@ -35,7 +35,6 @@ msgstr "Вторая попытка"
 
 msgid "on/off RFID SkiSport readout"
 msgstr "Режим cчитывания времени SkiSport"
-
 
 msgid "Contributors"
 msgstr "Разработчики"
@@ -683,7 +682,8 @@ msgid "scores formula"
 msgstr "расчет очков по формуле"
 
 msgid "scores formula hint"
-msgstr "Составьте произвольную формулу. Поддерживаются переменные: \n"
+msgstr ""
+"Составьте произвольную формулу. Поддерживаются переменные: \n"
 " leader - результат победителя группы; \n"
 " time - результат участника"
 
@@ -1515,9 +1515,6 @@ msgstr "Использовать финиш как КП с кодом:"
 msgid "Ignore readout before start"
 msgstr "Игнорировать считывание до старта"
 
-msgid "Ignore readout before start"
-msgstr ""
-
 msgid "Did not start"
 msgstr "НЕ СТАРТ."
 
@@ -1527,3 +1524,5 @@ msgstr "СОШЕЛ"
 msgid "Disqualified"
 msgstr "ДИСКВ."
 
+msgid "Alpine skiing"
+msgstr "Горнолыжный режим"

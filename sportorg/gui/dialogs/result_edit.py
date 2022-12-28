@@ -32,6 +32,7 @@ from sportorg.modules.live.live import live_client
 from sportorg.utils.time import hhmmss_to_time
 from sportorg.modules.teamwork import Teamwork
 from sportorg.utils.time import hhmmss_to_time, time_to_otime, time_to_qtime
+from sportorg.modules.telegram.telegram import telegram_client
 
 
 class ResultEditDialog(QDialog):
@@ -40,10 +41,10 @@ class ResultEditDialog(QDialog):
         self.current_object = result
         self.is_new = is_new
 
-        self.time_format = 'hh:mm:ss'
+        self.time_format = 'mm:ss:zzz'
         time_accuracy = race().get_setting('time_accuracy', 0)
         if time_accuracy:
-            self.time_format = 'hh:mm:ss.zzz'
+            self.time_format = 'mm:ss.zzz'
             if race().is_alpine_skiing_mode():
                 self.time_format = 'mm:ss:zzz'
 
