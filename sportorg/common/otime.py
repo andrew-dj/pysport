@@ -142,7 +142,7 @@ class OTime:
         elif time_accuracy == 3:
             return f'{hour:02}:{self.minute:02}:{self.sec:02}.{self.msec:003}'
         elif time_accuracy == 2:
-            return f'{hour:02}:{self.minute:02}:{self.sec:02}.{self.msec // 10:02}'
+            return f'{self.minute:02}:{self.sec:02}.{self.msec // 10:02}'
         elif time_accuracy == 1:
             return f'{hour:02}:{self.minute:02}:{self.sec:02}.{self.msec // 100}'
 

@@ -31,7 +31,7 @@ class PersonEditDialog(BaseDialog):
         self.is_new = is_new
         self.is_item_valid = {}
 
-        time_format = 'hh:mm:ss'
+        time_format = 'mm:ss:zzz'
         if race().get_setting('time_accuracy', 0):
             time_format = 'hh:mm:ss.zzz'
 

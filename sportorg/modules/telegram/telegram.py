@@ -55,7 +55,7 @@ class TelegramClient:
                     'bib': result.person.bib,
                     'result': result.get_result(),
                     'place': result.place,
-                    'penalty_time': result.penalty_time,
+                    'penalty_time': result.penalty_time.to_str(time_accuracy=2),
                     'penalty_laps': result.penalty_laps,
                 }
             )

@@ -303,7 +303,8 @@ def get_property(person, key):
     elif key == translate('Penalty time'):
         result = race().find_person_result(person)
         if result:
-            return time_to_hhmmss(result.get_penalty_time())
+            return time_to_hhmmss(result.get_penalty_time()).to_str(time_accuracy=2)
+                #time_to_hhmmss(result.get_penalty_time())
         else:
             return '00:00:00'
     elif key == translate('Penalty legs'):

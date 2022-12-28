@@ -13,6 +13,7 @@ from sportorg.models.memory import race
 from sportorg.utils.time import time_to_hhmmss
 
 
+
 class AbstractSportOrgMemoryModel(QAbstractTableModel):
     """
     Used to specify common table behavior
@@ -451,6 +452,7 @@ class ResultMemoryModel(AbstractSportOrgMemoryModel):
             time_accuracy = self.race.get_setting('time_accuracy', 0)
             finish = i.get_finish_time().to_str(time_accuracy)
         if race().is_alpine_skiing_mode():
+            penalty_time = i.get_penalty_time().to_str(time_accuracy)
             results_list = [
             bib,
             last_name,
@@ -459,7 +461,7 @@ class ResultMemoryModel(AbstractSportOrgMemoryModel):
             team,
             i.card_number,
             finish,
-            time_to_hhmmss(i.get_penalty_time()),
+            penalty_time,
             i.get_result(),
             i.status.get_title(),
             i.get_place(),
