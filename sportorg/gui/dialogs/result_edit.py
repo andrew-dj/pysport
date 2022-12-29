@@ -70,6 +70,7 @@ class ResultEditDialog(QDialog):
 
         self.item_created_at = AdvTimeEdit(display_format=self.time_format)
         self.item_created_at.setReadOnly(True)
+        self.item_created_at.setVisible(False)
 
         self.item_card_number = AdvSpinBox(maximum=9999999)
 
@@ -106,7 +107,7 @@ class ResultEditDialog(QDialog):
         more24 = race().get_setting('time_format_24', 'less24') == 'more24'
         self.splits = SplitsText(more24=more24)
 
-        form_layout.addRow(QLabel(translate('Created at')), self.item_created_at)
+        form_layout.addRow(QLabel(translate('-RESULTS-')), self.item_created_at)
         if self.current_object.is_punch():
             form_layout.addRow(QLabel(translate('Card')), self.item_card_number)
         form_layout.addRow(QLabel(translate('Bib')), self.item_bib)

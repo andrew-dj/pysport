@@ -32,8 +32,8 @@ poetry run python SportOrg.pyw
 
 ![Mainwindow sportorg](img/mainwindow.png)
 
-![Dialogedit sportorg](img/dialogedit.png)
-![Bibprintout sportorg](img/bibprintout.png)
+
+![Bibprintout sportorg](img/special.png)
 
 
 ## build
