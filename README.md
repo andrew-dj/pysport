@@ -7,7 +7,7 @@
 
 ![Bibprintout sportorg](img/logo.png)
 
-# SkiOrg (SportOrg Fork)
+# PySport (SportOrg Fork)
 
 Especially reconfigured for alpine ski competition.
 - 
