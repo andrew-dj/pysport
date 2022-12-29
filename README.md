@@ -29,12 +29,18 @@ Add `DEBUG=True` to `.env` file or `cp .env.example .env`
 ```commandline
 poetry run python SportOrg.pyw
 ```
+# Setup Alpine Ski mode
+- [ ] Set two decimals in time control settings
+![Mainwindow sportorg](img/Time_settings.png)
+ 
+- [ ] Setup Alpine Ski mode in competition settings
+![Bibprintout sportorg](img/Special.png)
 
-![Mainwindow sportorg](img/mainwindow.png)
+- [ ] Refactored preliminary results protocol
+![Bibprintout sportorg](img/Protocole.png)
 
-
-![Bibprintout sportorg](img/special.png)
-
+- [ ] Now you-re able to input result in alpine ski fashion
+![Bibprintout sportorg](img/Results_enter.png)
 
 ## build
 
@@ -46,4 +52,4 @@ poetry run python SportOrg.pyw
 ## Roadmap
 
 - [ ] Publish to pypi
-- [ ] Deploy to telegram
+- [ ] Finish proprietary timing system module (LoRa to USB)
