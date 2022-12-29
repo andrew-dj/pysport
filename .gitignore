@@ -51,10 +51,6 @@ coverage.xml
 .pytest_cache/
 cover/
 
-# Translations
-*.mo
-*.pot
-
 #Project save files
 *.json
 
@@ -142,5 +138,3 @@ cython_debug/
 
 .idea
 .vscode
-
-data

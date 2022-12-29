@@ -5,7 +5,15 @@
 [![Sportorg version](https://img.shields.io/github/v/release/sportorg/pysport)](https://github.com/sportorg/pysport)
 [![Orienteering](https://img.shields.io/github/stars/sportorg/pysport?style=social)](https://github.com/sportorg/pysport)
 
-# SportOrg
+# SkiOrg (SportOrg Fork)
+Especially reconfigured for alpine ski competition.
+- 
+- [ ] Splits GUI removed
+- [ ] No start time
+- [ ] First run and second run introduced
+- [ ] Modified Telegram functionality (Ctrl+T fast shortcut), help legend
+- [ ] Modified Reports (Start List and preliminary results)
+
 
 ```commandline
 pip install poetry
