@@ -9,12 +9,15 @@
 {% block content %}
 <div class="text-center">
     <h3>{{ race.data.description }} <br>
-    {{ race.data.start_datetime|date }} {{ race.data.location }}</h3>
-    <h2>START LIST</h2>
-</div>
+        {{ race.data.start_datetime|date }} {{ race.data.location }}</h3>
+    <hr>
+    <br>
+    <h2>ПРОТОКОЛ СТАРТА</h2>
+</div><br>
 <div id="start-list-tables"></div>
 <div>
     <table class="empty-table">
+        <br>
         <tr>
             <td><b>Главный судья:</b></td>
             <td width="150px"></td>
@@ -43,12 +46,11 @@
                     name: person.surname + ' ' + person.name,
                     org: (person.organization && String(person.organization.name).slice(0, MAX_ORG_NAME)) || '',
                     qual: Qualification[person.qual],
-                    bib: (person.bib % 1000 + '.' + person.bib / 1000),
+                    bib: person.bib,
                     card_number: person.card_number,
                     year: person.birth_date ? (new Date(person.birth_date)).getFullYear() : '',
                     start: toHHMMSS(person.start_time),
-                    start_time: person.start_time,
-					comment: person.comment
+                    start_time: person.start_time
                 });
             }
         }
@@ -92,14 +94,13 @@
     var Fields = {
         fields: [
             {key: 'index', title: '№', size: 4},
-            {key: 'name', title: 'Name', size: 30},
-            {key: 'org', title: 'Fed', size: 20},
-            {key: 'year', title: 'Year', size: 5},
-            //{key: 'qual', title: 'Разряд', size: 7},
-            {key: 'bib', title: 'Bib', size: 6},
-            {key: 'card_number', title: 'Card1', size: 11},
-			{key: 'comment', title: 'Card2', size: 11},
-            {key: 'start', title: 'Start', size: 13}
+            {key: 'name', title: 'Фамилия, имя', size: 30},
+            {key: 'org', title: 'Коллектив', size: 20},
+            {key: 'year', title: 'ГР', size: 5},
+            {key: 'qual', title: 'Разряд', size: 7},
+            {key: 'bib', title: 'Стартовый номер', size: 16},
+            {key: 'card_number', title: 'Номер эл. метки', size: 15},
+<!--            {key: 'start', title: 'Время старта', size: 13}-->
         ],
         active: function (key, val) {
             for (var _i = 0, _a = this.fields; _i < _a.length; _i++) {
@@ -133,13 +134,17 @@
     function render() {
         var resultBlock = document.getElementById('start-list-tables');
         resultBlock.innerHTML = '';
+         if (store.ReversedSorting) {
+             race.groups = race.groups.reverse();
+            }
         for (var _i = 0, _a = race.groups; _i < _a.length; _i++) {
+
             var group = _a[_i];
             var titleBlock = document.createElement('h2');
             titleBlock.id = group.name;
             titleBlock.appendChild(document.createTextNode(group.name));
             resultBlock.appendChild(titleBlock);
-            resultBlock.appendChild(getGroupsBlockElement(race));
+<!--            resultBlock.appendChild(getGroupsBlockElement(race));-->
             if (store.tableView) {
                 resultBlock.appendChild(new TableGenerator(getStartListByGroup(group), Fields.fields).getTable({className: 'sportorg-table'}));
             } else {
@@ -199,7 +204,7 @@
             }
         },
         {
-            title: 'Номер',
+            title: 'Стартовый номер',
             value: Fields.isActive('bib'),
             change: function (checked) {
                 Fields.active('bib', checked);
@@ -207,7 +212,7 @@
             }
         },
         {
-            title: 'Номер чипа',
+            title: 'Номер электронной метки',
             value: Fields.isActive('card_number'),
             change: function (checked) {
                 Fields.active('card_number', checked);
@@ -220,6 +225,14 @@
             change: function (checked) {
                 Scrolling.enabled = checked;
             }
+        },
+        {
+            title: 'Обратная сортировка',
+            value: !!store.ReversedSorting,
+            change: function (checked) {
+                store.ReversedSorting = checked;
+                render()
+                }
         },
     ]).show();
 </script>
