@@ -73,9 +73,9 @@ class MainTab(Tab):
         self.item_save_in_utf8.setChecked(Config().configuration.get('save_in_utf8', False))
         self.layout.addRow(self.item_save_in_utf8)
 
-        self.item_alpine_skiing_mode = QCheckBox(translate('Alpine skiing mode'))
-        self.item_alpine_skiing_mode.setChecked(Config().configuration.get('alpine_skiing_mode'))
-        self.layout.addRow(self.item_alpine_skiing_mode)
+        #self.item_alpine_skiing_mode = QCheckBox(translate('Alpine skiing mode'))
+        #self.item_alpine_skiing_mode.setChecked(Config().configuration.get('alpine_skiing_mode'))
+        #self.layout.addRow(self.item_alpine_skiing_mode)
 
         self.widget.setLayout(self.layout)
 
@@ -164,7 +164,7 @@ class MultidayTab(Tab):
         self.item_races = AdvComboBox()
         self.fill_race_list()
 
-        max_button_width = 100
+        max_button_width = 160
 
         def select_race():
             index = self.item_races.currentIndex()

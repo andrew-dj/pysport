@@ -28,7 +28,7 @@ class EventPropertiesDialog(QDialog):
         return super().exec_()
 
     def init_ui(self):
-        self.setFixedWidth(500)
+        self.setFixedWidth(600)
         self.setWindowTitle(translate('Event properties'))
         self.setWindowIcon(QIcon(config.ICON))
         self.setSizeGripEnabled(False)

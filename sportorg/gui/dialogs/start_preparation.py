@@ -30,10 +30,10 @@ class StartPreparationDialog(QDialog):
 
     def setup_ui(self):
         self.setWindowIcon(QtGui.QIcon(config.ICON))
-        self.setSizeGripEnabled(False)
+        self.setSizeGripEnabled(True)
         self.setModal(True)
         self.resize(639, 352)
-        self.setFixedSize(self.size())
+        #self.setFixedSize(self.size())
 
         self.button_box = QtWidgets.QDialogButtonBox(self)
         self.button_box.setGeometry(QtCore.QRect(40, 310, 341, 32))
@@ -43,9 +43,9 @@ class StartPreparationDialog(QDialog):
         )
 
         self.reserve_group_box = QtWidgets.QGroupBox(self)
-        self.reserve_group_box.setGeometry(QtCore.QRect(8, 0, 311, 121))
+        self.reserve_group_box.setGeometry(QtCore.QRect(8, 0, 311, 221))
         self.widget_reserve = QtWidgets.QWidget(self.reserve_group_box)
-        self.widget_reserve.setGeometry(QtCore.QRect(19, 20, 254, 97))
+        self.widget_reserve.setGeometry(QtCore.QRect(19, 20, 254, 197))
         self.reserve_layout = QtWidgets.QFormLayout(self.widget_reserve)
         self.reserve_layout.setContentsMargins(0, 0, 0, 0)
         self.reserve_prefix_label = QtWidgets.QLabel(self.widget_reserve)

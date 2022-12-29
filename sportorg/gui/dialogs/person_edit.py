@@ -36,7 +36,7 @@ class PersonEditDialog(BaseDialog):
             time_format = 'hh:mm:ss.zzz'
 
         self.title = translate('Entry properties')
-        self.size = (450, 640)
+        self.size = (550, 640)
         self.form = [
             LineField(
                 title=translate('Last name'),
