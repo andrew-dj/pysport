@@ -14,7 +14,7 @@ class Env(BaseSettings):
         env_file = '.env'
 
 
-NAME = 'SportOrg'
+NAME = 'PySport'
 VERSION = Version(1, 6, 0, 0, 'v')
 
 
