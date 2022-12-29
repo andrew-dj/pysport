@@ -29,23 +29,26 @@ class StartPreparationDialog(QDialog):
         return super().exec_()
 
     def setup_ui(self):
+        # main window geometry (LTWH)
+
         self.setWindowIcon(QtGui.QIcon(config.ICON))
         self.setSizeGripEnabled(True)
         self.setModal(True)
-        self.resize(639, 352)
-        #self.setFixedSize(self.size())
+        self.resize(639, 452)
+        # self.setFixedSize(self.size())
 
+        # OK Cancel buttons position block
         self.button_box = QtWidgets.QDialogButtonBox(self)
-        self.button_box.setGeometry(QtCore.QRect(40, 310, 341, 32))
+        self.button_box.setGeometry(QtCore.QRect(40, 410, 341, 32))
         self.button_box.setOrientation(QtCore.Qt.Horizontal)
         self.button_box.setStandardButtons(
             QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok
         )
-
+        # Reserve numbers block
         self.reserve_group_box = QtWidgets.QGroupBox(self)
-        self.reserve_group_box.setGeometry(QtCore.QRect(8, 0, 311, 221))
+        self.reserve_group_box.setGeometry(QtCore.QRect(8, 0, 311, 161))
         self.widget_reserve = QtWidgets.QWidget(self.reserve_group_box)
-        self.widget_reserve.setGeometry(QtCore.QRect(19, 20, 254, 197))
+        self.widget_reserve.setGeometry(QtCore.QRect(19, 20, 282, 157))
         self.reserve_layout = QtWidgets.QFormLayout(self.widget_reserve)
         self.reserve_layout.setContentsMargins(0, 0, 0, 0)
         self.reserve_prefix_label = QtWidgets.QLabel(self.widget_reserve)
@@ -82,10 +85,11 @@ class StartPreparationDialog(QDialog):
         )
         self.reserve_check_box.stateChanged.connect(self.reserve_activate)
 
+        #Random number group box geometry
         self.draw_group_box = QtWidgets.QGroupBox(self)
-        self.draw_group_box.setGeometry(QtCore.QRect(323, 0, 311, 121))
+        self.draw_group_box.setGeometry(QtCore.QRect(323, 0, 311, 161))
         self.widget_draw = QtWidgets.QWidget(self.draw_group_box)
-        self.widget_draw.setGeometry(QtCore.QRect(20, 16, 256, 88))
+        self.widget_draw.setGeometry(QtCore.QRect(20, 16, 282, 157))
         self.draw_layout = QtWidgets.QFormLayout(self.widget_draw)
         self.draw_layout.setContentsMargins(0, 0, 0, 0)
         self.draw_check_box = QtWidgets.QCheckBox(self.widget_draw)
@@ -117,10 +121,11 @@ class StartPreparationDialog(QDialog):
 
         self.draw_check_box.stateChanged.connect(self.draw_activate)
 
+        # Start time assignment group box
         self.start_group_box = QtWidgets.QGroupBox(self)
-        self.start_group_box.setGeometry(QtCore.QRect(8, 120, 311, 151))
+        self.start_group_box.setGeometry(QtCore.QRect(8, 170, 311, 181))
         self.widget_start = QtWidgets.QWidget(self.start_group_box)
-        self.widget_start.setGeometry(QtCore.QRect(18, 16, 256, 124))
+        self.widget_start.setGeometry(QtCore.QRect(18, 16, 282, 157))
         self.start_layout = QtWidgets.QFormLayout(self.widget_start)
         self.start_layout.setContentsMargins(0, 0, 0, 0)
         self.start_check_box = QtWidgets.QCheckBox(self.widget_start)
@@ -167,10 +172,11 @@ class StartPreparationDialog(QDialog):
         )
         self.start_check_box.stateChanged.connect(self.start_activate)
 
+        # Start numbers assignment
         self.numbers_group_box = QtWidgets.QGroupBox(self)
-        self.numbers_group_box.setGeometry(QtCore.QRect(322, 120, 311, 151))
+        self.numbers_group_box.setGeometry(QtCore.QRect(322, 170, 311, 181))
         self.widget_numbers = QtWidgets.QWidget(self.numbers_group_box)
-        self.widget_numbers.setGeometry(QtCore.QRect(18, 16, 256, 94))
+        self.widget_numbers.setGeometry(QtCore.QRect(18, 16, 282, 157))
         self.numbers_vert_layout = QtWidgets.QVBoxLayout(self.widget_numbers)
         self.numbers_vert_layout.setContentsMargins(0, 0, 0, 0)
         self.numbers_check_box = QtWidgets.QCheckBox(self.widget_numbers)
@@ -210,7 +216,7 @@ class StartPreparationDialog(QDialog):
         self.numbers_interval_radio_button.raise_()
 
         self.progress_bar = QtWidgets.QProgressBar(self)
-        self.progress_bar.setGeometry(QtCore.QRect(10, 280, 621, 23))
+        self.progress_bar.setGeometry(QtCore.QRect(10, 380, 621, 23))
         self.progress_bar.setProperty('value', 0)
 
         self.button_box.raise_()
