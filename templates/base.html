@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block head %}
+    <title>{% block title %}{% endblock %} - {{name}}</title>
+    {% endblock %}
+    {% include 'style.css.html' %}
+    {% include 'script.js.html' %}
+</head>
+<body>
+<div id="content">{% block content %}{% endblock %}</div>
+<div id="footer">
+    {% block footer %}
+    SkiOrg Forked from SportOrg
+    <script type="text/javascript">
+        var l = new Date();
+        document.write ('<span class="print-only">Время печати: ' + l.toLocaleString() + '</span>');
+    </script>
+    {% endblock %}
+</div>
+</body>
+</html>
