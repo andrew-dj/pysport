@@ -35,7 +35,7 @@
             {key: 'index', title: '№'},
             {key: 'name', title: 'Группа'},
             {key: 'count_person', title: 'Кол-во участников'},
-            {key: 'count_not_finished', title: 'Бегут'}
+            {key: 'count_not_finished', title: 'Нет результата'}
         ],
         didNotFields: [
             {key: 'group', title: 'Группа'},
@@ -54,7 +54,7 @@
             {key: 'year', title: 'ГР'},
             {key: 'qual', title: 'Разряд'},
             {key: 'bib', title: 'Номер'},
-            {key: 'start', title: 'Время старта'},
+            //{key: 'start', title: 'Время старта'},
             {key: 'result', title: 'Результат'},
             {key: 'diff', title: 'Отставание'},
             {key: 'speed', title: 'Темп', active: false},
@@ -123,7 +123,7 @@
                         penalty_laps: result.penalty_laps,
                         result: result.result,
                         resultMsec: result.result_msec,
-                        diff: toHHMMSS(result.diff),
+                        diff: toHHMMSSZZZ(result.diff),
                         place: result.place,
                         status: result.status,
                         place_show: result.person.is_out_of_competition ? 'в/к' : result.place === 0 ? '' : result.place <= -1 ? '' : result.place,
