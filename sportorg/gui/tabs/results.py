@@ -209,16 +209,9 @@ class Widget(QtWidgets.QWidget):
 
             self.result_card_details.append(s)
             code = split.code
-        if not race().is_alpine_skiing_mode():
-            self.result_card_finish_edit.setText(time_to_hhmmss(result.get_finish_time()))
-            self.result_card_start_edit.setText(time_to_hhmmss(result.get_start_time()))
-        else:
-            print("Alpine Skiing Mode")
-            print(race().is_alpine_skiing_mode())
-            self.result_card_finish_edit.setText(
-                time_to_mmsszzz(result.get_finish_time()))
-            self.result_card_start_edit.setText(
-                time_to_mmsszzz(result.get_start_time()))
+        self.result_card_finish_edit.setText(time_to_hhmmss(result.get_finish_time()))
+        self.result_card_start_edit.setText(time_to_hhmmss(result.get_start_time()))
+
         split_codes = []
         for split in result.splits:
             split_codes.append(split.code)

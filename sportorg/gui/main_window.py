@@ -632,8 +632,9 @@ class MainWindow(QMainWindow):
         file_name = get_save_file_name(
             translate('Create SportOrg file'),
             translate('SportOrg file (*.json)'),
-            time.strftime('%Y%m%d'),
+            race().data.title + "_" + time.strftime('%d_%m_%Y') + "_ (" + race().data.location + ")",
         )
+
         if file_name:
             try:
                 if update_data:

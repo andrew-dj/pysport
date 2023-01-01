@@ -13,6 +13,7 @@ from PySide2.QtWidgets import (
 
 from sportorg import config
 from sportorg.gui.global_access import GlobalAccess
+#from sportorg.gui.main_window import MainWindow
 from sportorg.gui.utils.custom_controls import AdvComboBox, AdvSpinBox
 from sportorg.language import translate
 from sportorg.models.memory import RaceType, race
@@ -150,3 +151,4 @@ class EventPropertiesDialog(QDialog):
 
         ResultCalculation(race()).process_results()
         GlobalAccess().get_main_window().set_title()
+

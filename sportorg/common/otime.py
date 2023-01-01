@@ -138,13 +138,13 @@ class OTime:
     def to_str(self, time_accuracy=0):
         hour = self.hour + self.day * 24
         if time_accuracy == 0:
-            return f'{hour:02}:{self.minute:02}:{self.sec:02}'
+            return f'{self.minute:02}:{self.sec:02}'
         elif time_accuracy == 3:
-            return f'{hour:02}:{self.minute:02}:{self.sec:02}.{self.msec:003}'
+            return f'{self.minute:02}:{self.sec:02}.{self.msec:003}'
         elif time_accuracy == 2:
             return f'{self.minute:02}:{self.sec:02}.{self.msec // 10:02}'
         elif time_accuracy == 1:
-            return f'{hour:02}:{self.minute:02}:{self.sec:02}.{self.msec // 100}'
+            return f'{self.minute:02}:{self.sec:02}.{self.msec // 100}'
 
     def round(self, time_accuracy: int = 0, time_rounding: Enum = TimeRounding.math):
         ms = self.to_msec()

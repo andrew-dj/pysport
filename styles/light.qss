@@ -91,6 +91,7 @@ QComboBox::down-arrow:on { /* shift the arrow when popup is open */
   top: 1px;
   left: 1px;
 }
+
 /* Button */
 
 QPushButton[flat] {
@@ -119,6 +120,7 @@ QLineEdit {
   border-bottom: 1px solid #E0E0E0;
   padding-top: 10px;
   padding-bottom: 9px;
+  font-size: 12 pt;
 }
 
 QLineEdit:focus {
@@ -129,6 +131,7 @@ QLineEdit:focus {
 
 QTextEdit {
   border: 1px solid #E0E0E0;
+  font-size: 12 pt;
 }
 
 /* checkbox */
@@ -136,6 +139,7 @@ QTextEdit {
 QCheckBox::indicator {
   border: 1px solid #999999;
   border-radius: 1px;
+  font-size: 12 pt;
 }
 
 QCheckBox::indicator:checked {
