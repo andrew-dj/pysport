@@ -15,7 +15,7 @@ class Env(BaseSettings):
 
 
 NAME = 'PySport'
-VERSION = Version(1, 6, 0, 0, 'v')
+VERSION = Version(1, 6, 0, 1, 'v')
 
 
 def is_executable():
