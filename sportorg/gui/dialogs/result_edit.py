@@ -58,7 +58,7 @@ class ResultEditDialog(QDialog):
         self.setWindowIcon(QIcon(config.ICON))
         self.setSizeGripEnabled(False)
         self.setModal(True)
-        self.resize(450, 740)
+        self.resize(500, 740)
         self.setMaximumWidth(self.parent().size().width())
         self.setMaximumHeight(self.parent().size().height())
 
@@ -186,19 +186,18 @@ class ResultEditDialog(QDialog):
             if person:
                 info = person.full_name
                 if not find(race().results, bib=bib):
-                    info_unique = 'Запись уникальна'
+                    info_unique = 'Результаты ранее не вводились'
 
                 elif find(race().results, bib=bib):
                     if race().result_unique_counter(person) < 2:
-                        info_unique = 'Внесена первая попытка, редактируйте.'
+                        info_unique = 'Информация о времени есть в базе.\n' \
+                                      'Добавлять новую запись не нужно'
                         if self.current_object.penalty_time is None:
                             self.button_ok.setVisible(True)
                     if race().result_unique_counter(person) >= 2:
-                        info_unique = 'Имеется более одного результата для\nспортсмена, сохранение невозможно!'
+                        info_unique = 'Имеется более одного результата для\n' \
+                                      'спортсмена, сохранение невозможно!'
                         self.button_ok.setVisible(False)
-                # if race().result_unique_counter(person) > 1:
-                #     info_unique = 'Имеется более одного результата для \n спортсмена, запись заблокирована!'
-                #     self.button_ok.setVisible(False)
 
                 self.label_person_result_unique.setText(info_unique)
                 if person.group:
