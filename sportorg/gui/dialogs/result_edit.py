@@ -78,6 +78,7 @@ class ResultEditDialog(QDialog):
         self.item_bib.valueChanged.connect(self.show_person_info)
 
         self.label_person_info = QLabel('')
+        self.label_person_result_unique = QLabel('')
 
         self.item_days = AdvSpinBox(maximum=365)
 
@@ -112,6 +113,7 @@ class ResultEditDialog(QDialog):
             form_layout.addRow(QLabel(translate('Card')), self.item_card_number)
         form_layout.addRow(QLabel(translate('Bib')), self.item_bib)
         form_layout.addRow(QLabel(''), self.label_person_info)
+        form_layout.addRow(QLabel(''), self.label_person_result_unique)
         if more24:
             form_layout.addRow(QLabel(translate('Days')), self.item_days)
         if not alpine_skiing_mode:
@@ -157,6 +159,7 @@ class ResultEditDialog(QDialog):
         button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         self.button_ok = button_box.button(QDialogButtonBox.Ok)
         self.button_ok.setText(translate('OK'))
+
         self.button_ok.clicked.connect(apply_changes)
         self.button_cancel = button_box.button(QDialogButtonBox.Cancel)
         self.button_cancel.setText(translate('Cancel'))
@@ -175,11 +178,29 @@ class ResultEditDialog(QDialog):
 
     def show_person_info(self):
         bib = self.item_bib.value()
-        self.label_person_info.setText('')
+        self.button_ok.setVisible(True)
+        info_unique = ''
+        # self.label_person_info.setText('')
         if bib:
             person = find(race().persons, bib=bib)
             if person:
                 info = person.full_name
+                if not find(race().results, bib=bib):
+                    info_unique = 'Запись уникальна'
+
+                elif find(race().results, bib=bib):
+                    if race().result_unique_counter(person) < 2:
+                        info_unique = 'Внесена первая попытка, редактируйте.'
+                        if self.current_object.penalty_time is None:
+                            self.button_ok.setVisible(True)
+                    if race().result_unique_counter(person) >= 2:
+                        info_unique = 'Имеется более одного результата для\nспортсмена, сохранение невозможно!'
+                        self.button_ok.setVisible(False)
+                # if race().result_unique_counter(person) > 1:
+                #     info_unique = 'Имеется более одного результата для \n спортсмена, запись заблокирована!'
+                #     self.button_ok.setVisible(False)
+
+                self.label_person_result_unique.setText(info_unique)
                 if person.group:
                     info = '{}\n{}: {}'.format(
                         info, translate('Group'), person.group.name

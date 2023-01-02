@@ -1428,6 +1428,13 @@ class Race(Model):
             del self.results[i]
         return results
 
+    def result_unique_counter(self, person):
+        s = 0
+        for i in self.results:
+            if i.person == person:
+                s += 1
+        return s
+
     def delete_groups(self, indexes):
         self.update_counters()
         groups = []
