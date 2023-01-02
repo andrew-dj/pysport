@@ -1583,6 +1583,9 @@ class Race(Model):
     def get_persons_by_group(self, group):
         return find(self.persons, group=group, return_all=True)
 
+    def get_all_persons(self):
+        return self.persons
+
     def get_persons_by_corridor(self, corridor):
         ret = []
         for person in self.persons:

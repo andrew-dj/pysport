@@ -206,10 +206,15 @@ def menu_list():
             'title': translate('Start Preparation'),
             'actions': [
                 {
+                    'title': translate('Create bunch manual results'),
+                    'action': 'ManualFinishPrepareAction',
+                },
+                {
                     'title': translate('Start Preparation'),
                     'action': 'StartPreparationAction',
                 },
-                {'title': translate('Guess courses'), 'action': 'GuessCoursesAction'},
+                {'title': translate('Guess courses'),
+                 'action': 'GuessCoursesAction'},
                 {
                     'title': translate('Guess corridors'),
                     'action': 'GuessCorridorsAction',

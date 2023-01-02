@@ -481,6 +481,19 @@ class ManualFinishAction(Action, metaclass=ActionFactory):
         self.app.refresh()
 
 
+class ManualFinishPrepareAction(Action, metaclass=ActionFactory):
+    def execute(self):
+        for person in race().get_all_persons():
+            bib = person.bib
+            result = race().new_result(ResultManual)
+            result.bib = bib
+            Teamwork().send(result.to_dict())
+            live_client.send(result)
+            race().add_new_result(result)
+            logging.info(translate('Manual finish'))
+            self.app.refresh()
+
+
 class SPORTidentReadoutAction(Action, metaclass=ActionFactory):
     def execute(self):
         SIReaderClient().toggle()
