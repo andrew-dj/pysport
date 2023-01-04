@@ -483,15 +483,21 @@ class ManualFinishAction(Action, metaclass=ActionFactory):
 
 class ManualFinishPrepareAction(Action, metaclass=ActionFactory):
     def execute(self):
-        for person in race().get_all_persons():
-            bib = person.bib
-            result = race().new_result(ResultManual)
-            result.bib = bib
-            Teamwork().send(result.to_dict())
-            live_client.send(result)
-            race().add_new_result(result)
-            logging.info(translate('Manual finish'))
-            self.app.refresh()
+        if len(race().results) < 1:
+            for person in race().get_all_persons():
+                bib = person.bib
+                result = race().new_result(ResultManual)
+                result.bib = bib
+                Teamwork().send(result.to_dict())
+                live_client.send(result)
+                race().add_new_result(result)
+                logging.info(translate('Manual finish'))
+                self.app.refresh()
+                logging.info(translate(
+                    'Initial empty results created'))
+        else:
+            logging.error(
+                translate('Cannot create bulk results - results not empty'))
 
 
 class SPORTidentReadoutAction(Action, metaclass=ActionFactory):

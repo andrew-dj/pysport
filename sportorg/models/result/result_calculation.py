@@ -2,7 +2,8 @@ import logging
 
 from sportorg.common.otime import OTime
 from sportorg.models.constant import RankingTable
-from sportorg.models.memory import Group, Qualification, RaceType, RelayTeam, find, ResultStatus
+from sportorg.models.memory import Group, Qualification, RaceType, RelayTeam, \
+    find, ResultStatus, race
 from sportorg.modules.configs.configs import Config
 
 
@@ -60,7 +61,7 @@ class ResultCalculation(object):
 
             res.place = -1
             # give place only if status = OK
-            if res.is_status_ok():
+            if res.is_status_ok() and res.get_result_otime() > 0:
                 current_result = res.get_result_otime()
                 res.diff = current_result - array[0].get_result_otime()
                 res.diff_scores = array[0].scores - res.scores

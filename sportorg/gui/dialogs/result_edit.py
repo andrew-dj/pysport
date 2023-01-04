@@ -75,6 +75,8 @@ class ResultEditDialog(QDialog):
         self.item_card_number = AdvSpinBox(maximum=9999999)
 
         self.item_bib = AdvSpinBox(maximum=Limit.BIB)
+        if race().results[self.item_bib.value()].finish_time is not None:
+            self.item_bib.setReadOnly(True)
         self.item_bib.valueChanged.connect(self.show_person_info)
 
         self.label_person_info = QLabel('')
@@ -156,11 +158,19 @@ class ResultEditDialog(QDialog):
                 logging.exception(e)
             self.close()
 
-        button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        button_box = QDialogButtonBox(
+            QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         self.button_ok = button_box.button(QDialogButtonBox.Ok)
         self.button_ok.setText(translate('OK'))
 
+        if not self.button_ok.isVisible():
+            self.button_unblock = button_box.addButton(
+                translate('Изменить результаты'), QDialogButtonBox.ActionRole
+            )
+            self.button_unblock.clicked.connect(self.unblock_result)
+
         self.button_ok.clicked.connect(apply_changes)
+
         self.button_cancel = button_box.button(QDialogButtonBox.Cancel)
         self.button_cancel.setText(translate('Cancel'))
         self.button_cancel.clicked.connect(cancel_changes)
@@ -174,7 +184,14 @@ class ResultEditDialog(QDialog):
         vertical_layout.addWidget(button_box)
 
         self.show()
-        self.item_bib.setFocus()
+
+        if self.current_object.finish_time is not None:
+            if self.current_object.finish_time.to_msec() == 0:
+                self.item_finish.setFocus()
+            else:
+                self.item_penalty.setFocus()
+        else:
+            self.item_finish.setFocus()
 
     def show_person_info(self):
         bib = self.item_bib.value()
@@ -183,17 +200,27 @@ class ResultEditDialog(QDialog):
         # self.label_person_info.setText('')
         if bib:
             person = find(race().persons, bib=bib)
+            result = find(race().results, bib=bib)
+            if result:
+                penalty_time = result.penalty_time
+                finish_time = result.finish_time
             if person:
                 info = person.full_name
                 if not find(race().results, bib=bib):
                     info_unique = 'Результаты ранее не вводились'
 
-                elif find(race().results, bib=bib):
-                    if race().result_unique_counter(person) < 2:
-                        info_unique = 'Информация о времени есть в базе.\n' \
-                                      'Добавлять новую запись не нужно'
-                        if self.current_object.penalty_time is None:
-                            self.button_ok.setVisible(True)
+                if find(race().results, bib=bib):
+                    # self.set_values_from_model()
+                    if penalty_time is not None:
+                        if penalty_time.to_msec() > 0:
+                            info_unique = 'В результатах есть время текущего спортсмена\n' \
+                                          'Добавлять новую запись нельзя'
+                            self.button_ok.setVisible(False)
+                    # if penalty_time.to_msec() == 0 and finish_time is not None:
+                    #     info_unique = 'В результатах есть время текущего спортсмена\n' \
+                    #                   'Вы вводите вторую попытку'
+                    #     self.button_ok.setVisible(True)
+
                     if race().result_unique_counter(person) >= 2:
                         info_unique = 'Имеется более одного результата для\n' \
                                       'спортсмена, сохранение невозможно!'
@@ -327,6 +354,10 @@ class ResultEditDialog(QDialog):
         ResultCalculation(race()).process_results()
         live_client.send(result)
         Teamwork().send(result.to_dict())
+
+    def unblock_result(self):
+        self.button_unblock.setVisible(False)
+        self.button_ok.setVisible(True)
 
 
 class SplitsObject:
