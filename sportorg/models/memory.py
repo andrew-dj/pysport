@@ -599,6 +599,11 @@ class Result:
                 return self.status_comment
             return self.status.get_title()
 
+        if self.get_result_otime():
+            if self.get_result_otime().to_msec == 0:
+                return ''
+            return ''
+
         if not self.person:
             return ''
 
@@ -606,7 +611,7 @@ class Result:
         if race().get_setting('result_processing_mode', 'time') == 'scores':
             ret += str(self.scores_rogain) + ' ' + translate('points') + ' '
 
-        time_accuracy = race().get_setting('time_accuracy', 2)
+        time_accuracy = race().get_setting('time_accuracy', 0)
         ret += self.get_result_otime().to_str(time_accuracy)
         return ret
 
@@ -733,6 +738,8 @@ class Result:
             return self.place
         if self.person and self.person.is_out_of_competition:
             return translate('o/c')
+        if self.get_finish_time().to_msec() == 0:
+            return ''
         return ''
 
     def get_course_splits(self, course=None):

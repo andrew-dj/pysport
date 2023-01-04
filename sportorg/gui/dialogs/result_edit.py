@@ -75,6 +75,7 @@ class ResultEditDialog(QDialog):
         self.item_card_number = AdvSpinBox(maximum=9999999)
 
         self.item_bib = AdvSpinBox(maximum=Limit.BIB)
+        # COMMENT: lock bib change if result is not None -->
         if race().results[self.item_bib.value()].finish_time is not None:
             self.item_bib.setReadOnly(True)
         self.item_bib.valueChanged.connect(self.show_person_info)
