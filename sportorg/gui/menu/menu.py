@@ -213,36 +213,7 @@ def menu_list():
                     'title': translate('Start Preparation'),
                     'action': 'StartPreparationAction',
                 },
-                {'title': translate('Guess courses'),
-                 'action': 'GuessCoursesAction'},
-                {
-                    'title': translate('Guess corridors'),
-                    'action': 'GuessCorridorsAction',
-                },
-                {
-                    'title': translate('Relay number assign mode'),
-                    'tabs': [0],
-                    'action': 'RelayNumberAction',
-                },
-                {
-                    'title': translate('Start time change'),
-                    'action': 'StartTimeChangeAction',
-                },
-                {
-                    'title': translate('Handicap start time'),
-                    'action': 'StartHandicapAction',
-                },
-                {
-                    'title': translate('Clone relay legs'),
-                    'action': 'RelayCloneAction'},
-                {
-                    'title': translate('Use bib as card number'),
-                    'action': 'CopyBibToCardNumber',
-                },
-                {
-                    'title': translate('Use card number as bib'),
-                    'action': 'CopyCardNumberToBib',
-                },
+
             ],
         },
         {
@@ -276,22 +247,10 @@ def menu_list():
                 {
                     'type': 'separator',
                 },
+
                 {
-                    'title': translate('Rechecking'),
-                    'shortcut': 'Ctrl+R',
-                    'action': 'RecheckingAction',
-                },
-                {
-                    'title': translate('Find group by punches'),
-                    'tabs': [1],
-                    'action': 'GroupFinderAction',
-                },
-                {
-                    'title': translate('Penalty calculation'),
-                    'action': 'PenaltyCalculationAction',
-                },
-                {
-                    'title': translate('Penalty removing'),
+                    'title': translate(
+                        'Удалить результат второй попытки у всех'),
                     'action': 'PenaltyRemovingAction',
                 },
                 {
@@ -303,25 +262,6 @@ def menu_list():
                 {
                     'title': translate('Set DNS numbers'),
                     'action': 'SetDNSNumbersAction',
-                },
-                {
-                    'title': translate('Delete CP'),
-                    'action': 'CPDeleteAction'},
-                {
-                    'title': translate('Delete Split'),
-                    'action': 'SplitDeleteAction'
-                },
-                {
-                    'title': translate('Merge results'),
-                    'action': 'MergeResultsAction'
-                },
-                {
-                    'title': translate('Assign result by bib'),
-                    'action': 'AssignResultByBibAction'
-                },
-                {
-                    'title': translate('Assign result by card number'),
-                    'action': 'AssignResultByCardNumberAction',
                 },
             ],
         },

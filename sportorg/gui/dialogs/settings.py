@@ -100,7 +100,7 @@ class MainTab(Tab):
         Config().configuration.set('use_birthday', self.item_use_birthday.isChecked())
         Config().configuration.set('check_updates', self.item_check_updates.isChecked())
         Config().configuration.set('save_in_utf8', self.item_save_in_utf8.isChecked())
-        Config().configuration.set('alpine_skiing_mode', self.item_alpine_skiing_mode.isChecked())
+        # Config().configuration.set('alpine_skiing_mode', self.item_alpine_skiing_mode.isChecked())
 
 
 class SoundTab(Tab):
