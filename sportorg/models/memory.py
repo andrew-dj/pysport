@@ -600,9 +600,9 @@ class Result:
             return self.status.get_title()
 
         if self.get_result_otime():
-            if self.get_result_otime().to_msec == 0:
+            if self.get_result_otime().to_msec() == 0:
                 return ''
-            return ''
+            # return 'shit'
 
         if not self.person:
             return ''
@@ -624,7 +624,7 @@ class Result:
         if not self.person:
             return ''
 
-        ret = ''
+        ret = 'error'
         if race().get_setting('result_processing_mode', 'time') == 'scores':
             ret += str(self.scores_rogain) + ' ' + translate('points') + ' '
 

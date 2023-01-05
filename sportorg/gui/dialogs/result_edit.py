@@ -198,13 +198,11 @@ class ResultEditDialog(QDialog):
         bib = self.item_bib.value()
         self.button_ok.setVisible(True)
         info_unique = ''
-        # self.label_person_info.setText('')
         if bib:
             person = find(race().persons, bib=bib)
             result = find(race().results, bib=bib)
             if result:
                 penalty_time = result.penalty_time
-                finish_time = result.finish_time
             if person:
                 info = person.full_name
                 if not find(race().results, bib=bib):

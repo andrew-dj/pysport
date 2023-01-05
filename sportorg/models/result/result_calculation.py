@@ -60,9 +60,8 @@ class ResultCalculation(object):
             res = array[i]
 
             res.place = -1
-            # give place only if status = OK
+            # give place only if status = OK and first run (Alpine skiing) is not null
             if res.is_status_ok() and res.get_finish_time().to_msec() > 0:
-                print(type(res.get_result_otime))
                 current_result = res.get_result_otime()
                 res.diff = current_result - array[0].get_result_otime()
                 res.diff_scores = array[0].scores - res.scores
