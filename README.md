@@ -7,7 +7,7 @@
 
 ![Bibprintout sportorg](img/logo.png)
 
-# PySport (SportOrg Fork)
+# PySport v1.6.1 (SportOrg Fork)
 
 Especially reconfigured for alpine ski competition.
 - 
@@ -44,7 +44,7 @@ poetry run python SportOrg.pyw
 ![Bibprintout sportorg](img/Protocole.png)
 
 - [ ] Now you-re able to input result in alpine ski fashion
-![Bibprintout sportorg](img/Results_enter.png)
+  ![Bibprintout sportorg](img/Results_enter.png)
 
 ## build
 
@@ -52,6 +52,15 @@ poetry run python SportOrg.pyw
 
 `python setup_.py build`
 
+## HiDPI issue
+
+`To fix small fonts on HiDPI displays run following in command line`
+
+```commandline
+setx QT_AUTO_SCREEN_SCALE_FACTOR "1"
+setx QT_AUTO_SCREEN_SCALE_FACTOR "1" /M
+setx QT_FONT_DPI "196"
+```
 
 ## Roadmap
 
