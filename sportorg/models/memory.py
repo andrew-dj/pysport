@@ -600,9 +600,9 @@ class Result:
             return self.status.get_title()
 
         if self.get_result_otime():
-            if self.get_result_otime().to_msec() == 0:
+            if self.get_result_otime().to_msec() == 0 or self.get_finish_time().to_msec() == 0:
                 return ''
-            # return 'shit'
+            # return ''
 
         if not self.person:
             return ''
