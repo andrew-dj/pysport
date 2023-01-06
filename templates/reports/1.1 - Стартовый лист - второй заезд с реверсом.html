@@ -203,6 +203,9 @@
                 elem.index = index;
             })
         }
+        if (store.reversed_ != 0){
+                results = results.splice(0, store.reversed_).reverse().concat(results);
+                }
         return results;
     }
 	function getResultsByCourse(group, count) {
@@ -568,10 +571,6 @@
             } else {
                 var group = _a[_i];
                 var rows = getResultsByGroup(group, store.count);
-                if (store.reverse_!=0){
-                var rows = rows.slice(0, store.reverse_).reverse().concat(rows)
-                print(rows)
-                }
                 var course = group.course;
                 var groupName = group.name;
             }
@@ -794,15 +793,15 @@
             title: 'Реверсировать лучшие результаты: ',
             value: [
                 {text: 'Не реверсировать', value: 0},
-                {text: '5 результатов', value: 1},
-                {text: '10 результатов', value: 3},
-                {text: '15 результатов', value: 4},
-                {text: '20 результатов', value: 5},
-                {text: '25 результатов', value: 6},
-                {text: '30 результатов', value: 10}
+                {text: '5 результатов', value: 5},
+                {text: '10 результатов', value: 10},
+                {text: '15 результатов', value: 15},
+                {text: '20 результатов', value: 20},
+                {text: '25 результатов', value: 25},
+                {text: '30 результатов', value: 30}
             ],
             change: function (arr) {
-                store.reversed = arr[0];
+                store.reversed_ = arr[0];
                 render();
             }
         },
