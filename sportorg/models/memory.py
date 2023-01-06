@@ -74,6 +74,15 @@ class RaceType(_TitleType):
     ALPINE_SKIING = 6
 
 
+class ResultAlpineSkiStatus(_TitleType):
+    OK = 1
+    DISQUALIFIED = 3
+    DID_NOT_FINISH = 5
+    NOT_COMPETING = 10
+    DID_NOT_START = 13
+    RESTORED = 16
+
+
 class ResultStatus(_TitleType):
     NONE = 0
     OK = 1

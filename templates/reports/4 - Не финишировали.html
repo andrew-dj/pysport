@@ -4,7 +4,7 @@
 {% block content %}
 <div class="text-center">
     <h3>{{ race.data.description }} <br>{{ race.data.start_datetime|date }} {{ race.data.location }}</h3>
-    <h2>ПРОТОКОЛ РЕЗУЛЬТАТОВ</h2>
+    <h2>НЕТ РЕЗУЛЬТАТА</h2>
 </div>
 <div id="groups-table"></div>
 <div id="not-results-table"></div>
@@ -41,11 +41,12 @@
             {key: 'group', title: 'Группа'},
             {key: 'name', title: 'Фамилия, имя'},
             {key: 'bib', title: 'Номер'},
-            {key: 'start', title: 'Время старта'},
+            //{key: 'result', title: 'result!'},
             {key: 'year', title: 'ГР'},
             {key: 'qual', title: 'Разряд'},
             {key: 'org', title: 'Коллектив'},
-            {key: 'contact', title: 'Контактные данные'}
+            //{key: 'contact', title: 'Контактные данные'},
+            {key: 'status', title: 'Причина'}
         ],
         fields: [
             {key: 'index', title: '№'},
@@ -57,7 +58,7 @@
             //{key: 'start', title: 'Время старта'},
             {key: 'result', title: 'Результат'},
             {key: 'diff', title: 'Отставание'},
-            {key: 'speed', title: 'Темп', active: false},
+            {key: 'status', title: 'Status'},
             {key: 'place_show', title: 'Место'},
             {key: 'contact', title: 'Контактные данные'}
         ],
@@ -92,7 +93,7 @@
                 person_id: person && person.id,
                 person: person,
                 place: -2,
-                result: "НЕТ ФИНИША",
+                result: "НЕТ РЕЗУЛЬТАТА",
                 result_msec: 86400000,
                 scores: 0,
                 speed: "",
@@ -100,10 +101,19 @@
                 card_number: person && person.card_number,
                 start_msec: person && person.start_time || 0,
                 start_time: person && person.start_time,
-                status: 14,
+                status: "НЕТ ФИНИША",
                 status_comment: "",
                 system_type: 2
             }
+        },
+        abbrInsteadOfNumber: function (number){
+            if (number == 3){
+            var ret_ = "DNS";
+            }
+            else{
+            var ret_ = "Unknown";
+            }
+        return ret_
         },
         getResults: function (group) {
             var isRelay = group.__type ? group.__type === 3 : this.race.data.race_type === 3;
@@ -125,12 +135,13 @@
                         resultMsec: result.result_msec,
                         diff: toHHMMSSZZZ(result.diff),
                         place: result.place,
-                        status: result.status,
+                        status: result.status === 3 ? 'DSQ': result.status === 5 ? 'DNF': result.status ===10 ? 'Вне конкурса' : result.status === 13 ? 'DNS' : result.status,
                         place_show: result.person.is_out_of_competition ? 'в/к' : result.place === 0 ? '' : result.place <= -1 ? '' : result.place,
                         speed: result.speed,
                         contact: result.person.organization && result.person.organization.contact.value,
                         start: toHHMMSS(result.start_msec),
-                        data: result
+                        data: result,
+                        status_: abbrInsteadOfNumber(status)
                     };
                     if (result.status !== 1) {
                         r.diff = '';
@@ -204,7 +215,7 @@
             var results = [];
             for (var _i = 0, _a = this.race.results; _i < _a.length; _i++) {
                 var result = _a[_i];
-                if (result.status === 14) {
+                if (result.status != 1 && result.status !=16) {
                     var r = {
                         name: result.person.surname + ' ' + result.person.name,
                         group: (result.person.group && result.person.group.name) || '',
@@ -214,7 +225,8 @@
                         start: toHHMMSS(result.start_msec),
                         contact: result.person.organization && result.person.organization.contact.value,
                         year: result.person.birth_date ? (new Date(result.person.birth_date)).getFullYear() : '',
-                        data: result
+                        data: result,
+                        status: result.status === 3 ? 'DSQ': result.status === 5 ? 'DNF': result.status ===10 ? 'Вне конкурса' : result.status === 13 ? 'DNS' : result.status
                     };
                     results.push(r);
                 }
@@ -274,17 +286,6 @@
             var groupBlock = document.getElementById('groups-table');
             groupBlock.innerHTML = '';
 
-            groupBlock.appendChild(new TableGenerator(this.getGroupRows().map(function (group) {
-                if (group.name !== 'Всего') {
-                    var a = document.createElement('a');
-                    a.href = '#' + group.name;
-                    a.appendChild(document.createTextNode(group.name));
-                    group.name = a;
-                }
-                return group;
-            }), this.groupFields).getTable({ className: 'sportorg-table' }));
-
-            groupBlock.appendChild(document.createElement('hr'));
 
             notResultBlock.appendChild(new TableGenerator(
                 this.getDidNotEnterResults(),
@@ -293,23 +294,6 @@
 
             notResultBlock.appendChild(document.createElement('hr'));
 
-            for (var _i = 0, _a = this.race.groups; _i < _a.length; _i++) {
-                var group = _a[_i];
-                var r = this.getResults(group);
-
-                var titleBlock = document.createElement('h2');
-                titleBlock.id = group.name;
-                titleBlock.appendChild(document.createTextNode(group.name));
-                if (group.max_time) {
-                    titleBlock.appendChild(document.createTextNode(', Контрольное время: ' + toHHMMSS(group.max_time)));
-                }
-                if (r.countDidNotEnter) {
-                    titleBlock.appendChild(document.createTextNode(', Не финишировали: ' + r.countDidNotEnter));
-                }
-                resultBlock.appendChild(titleBlock);
-                resultBlock.appendChild(getGroupsBlockElement(race));
-                resultBlock.appendChild(new TableGenerator(r.results, this.fields).getTable({ className: 'sportorg-table' }));
-            }
         }
     }.init();
 </script>

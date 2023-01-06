@@ -24,7 +24,8 @@ from sportorg.gui.global_access import GlobalAccess
 from sportorg.gui.utils.custom_controls import AdvComboBox, AdvSpinBox, AdvTimeEdit
 from sportorg.language import translate
 from sportorg.models.constant import StatusComments
-from sportorg.models.memory import Limit, ResultStatus, Split, find, race
+from sportorg.models.memory import Limit, ResultStatus, ResultAlpineSkiStatus, \
+    find, race
 from sportorg.models.result.result_calculation import ResultCalculation
 from sportorg.models.result.result_checker import ResultChecker, ResultCheckerException
 from sportorg.models.result.split_calculation import GroupSplits
@@ -58,7 +59,7 @@ class ResultEditDialog(QDialog):
         self.setWindowIcon(QIcon(config.ICON))
         self.setSizeGripEnabled(False)
         self.setModal(True)
-        self.resize(500, 740)
+        self.resize(500, 540)
         self.setMaximumWidth(self.parent().size().width())
         self.setMaximumHeight(self.parent().size().height())
 
@@ -99,7 +100,7 @@ class ResultEditDialog(QDialog):
         self.item_penalty_laps = AdvSpinBox(maximum=1000000)
 
         self.item_status = QComboBox()
-        self.item_status.addItems(ResultStatus.get_titles())
+        self.item_status.addItems(ResultAlpineSkiStatus.get_titles())
 
         self.item_status_comment = AdvComboBox()
         self.item_status_comment.setMaximumWidth(300)
