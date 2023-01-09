@@ -846,7 +846,7 @@ class MainWindow(QMainWindow):
 
     def menu_active_hint(self):
         if platform() == 'Darwin':
-            if self.firstrun <= 2:
+            if self.firstrun < 2:
                 subprocess.call(["/usr/bin/osascript", "-e",
                                  'tell app "Finder" to set frontmost of process "Finder" to true'])
                 subprocess.call(["/usr/bin/osascript", "-e",
