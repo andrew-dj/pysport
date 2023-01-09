@@ -1,9 +1,12 @@
 import ast
 import logging
+from platform import system as platform
 import time
 from queue import Queue
 import os
+import subprocess
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
+
 
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import QTimer
@@ -93,6 +96,8 @@ class MainWindow(QMainWindow):
         self.relay_number_assign = False
         self.split_printer_thread = None
         self.split_printer_queue = None
+        self.firstrun = 0
+        # QMainWindow.setNativeMenuBar(False)
 
     def _set_style(self):
         try:
@@ -394,11 +399,11 @@ class MainWindow(QMainWindow):
             self.statusbar.showMessage(msg, msecs)
 
     def logging(self, text):
+        self.menu_active_hint()
         self.log_queue.put(text)
 
     def select_tab(self, index):
         self.current_tab = index
-
     @property
     def current_tab(self):
         return self.tabwidget.currentIndex()
@@ -474,7 +479,6 @@ class MainWindow(QMainWindow):
             table.model().init_cache()
             table.model().layoutChanged.emit()
             self.set_title()
-
             print('Refresh in {:.3f} seconds.'.format(time.time() - t))
             Broker().produce('refresh')
         except Exception as e:
@@ -839,3 +843,12 @@ class MainWindow(QMainWindow):
 
     def set_split_printer_queue(self, split_printer_app):
         self.split_printer_queue = split_printer_app
+
+    def menu_active_hint(self):
+        if platform() == 'Darwin':
+            if self.firstrun <= 2:
+                subprocess.call(["/usr/bin/osascript", "-e",
+                                 'tell app "Finder" to set frontmost of process "Finder" to true'])
+                subprocess.call(["/usr/bin/osascript", "-e",
+                                 'tell app "Finder" to set frontmost of process "python" to true'])
+                self.firstrun += 1

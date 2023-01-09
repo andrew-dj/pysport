@@ -1,8 +1,8 @@
 import sys
 from multiprocessing import freeze_support
-
+from platform import system as platform
 from PySide2.QtWidgets import QApplication
-
+import subprocess
 from sportorg import config
 from sportorg.common.singleton import Singleton
 from sportorg.gui.global_access import GlobalAccess
