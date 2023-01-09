@@ -18,6 +18,8 @@ Especially reconfigured for alpine ski competition.
 - [ ] Modified Telegram functionality (Ctrl+T fast shortcut), help legend
 - [ ] Modified Reports (Start List and preliminary results)
 - [ ] Fixed ini file
+- [ ] Fixed MacOs M1 compatibility
+- [ ] Special reports added
 
 
 ```commandline
