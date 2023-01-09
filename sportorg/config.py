@@ -8,7 +8,7 @@ from sportorg.common.version import Version
 
 
 class Env(BaseSettings):
-    DEBUG: bool = False
+    DEBUG: bool = True
 
     class Config:
         env_file = '.env'

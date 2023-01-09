@@ -2,6 +2,8 @@ import ast
 import logging
 import time
 from queue import Queue
+import os
+os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import QTimer
