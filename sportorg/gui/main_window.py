@@ -5,8 +5,6 @@ import time
 from queue import Queue
 import os
 import subprocess
-os.environ['QT_MAC_WANTS_LAYER'] = '1'
-
 
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import QTimer
@@ -56,6 +54,10 @@ from sportorg.modules.sportiduino.sportiduino import SportiduinoClient
 from sportorg.modules.telegram.telegram import telegram_client
 from sportorg.modules.teamwork import Teamwork, ObjectTypes
 from sportorg.modules.live.live import LiveClient
+
+os.environ['QT_MAC_WANTS_LAYER'] = '1'
+os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
+os.environ['QT_FONT_DPI'] = '196'
 
 
 class ConsolePanelHandler(logging.Handler):
