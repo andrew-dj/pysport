@@ -65,8 +65,8 @@ if Config().configuration.get('font_size') == 'big':
     os.environ['QT_FONT_DPI'] = str(font_size)
 else:
     os.environ['QT_FONT_DPI'] = ''
-    print(get_font_size_value(Config().configuration.get('font_size')))
-    #debug system environments
+
+    #debug system environment variables
     # for name, value in os.environ.items():
     #     print("{0}: {1}".format(name, value))
 

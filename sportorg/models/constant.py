@@ -184,7 +184,7 @@ def get_countries():
     ]
 
 
-font_size_dict = {'normal': 0, 'big': 192}
+font_size_dict = {'normal': 60, 'big': 192}
 
 
 def get_font_size():

@@ -81,7 +81,7 @@ class Config(metaclass=Singleton):
                 'autosave_interval': 0,
                 'logging_level': 'INFO',
                 'log_window_row_count': 1000,
-                'font_size': '',
+                'font_size': 'normal',
             }),
             ConfigFile.SOUND: Configurations({
                 'enabled': False,
