@@ -18,6 +18,8 @@ class GlobalAccess(object):
         return self.app.get_main_window()
 
 
+
+
 @singleton
 class NumberClicker(object):
     def __init__(self):
