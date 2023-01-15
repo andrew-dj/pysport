@@ -78,8 +78,10 @@ class MainTab(Tab):
         self.font_size = AdvComboBox()
         self.font_size.addItems(get_font_size())
         self.font_size.setCurrentText(
-            Config().configuration.get('font_size', 'medium'))
+            Config().configuration.get('font_size', 'Normal'))
+        self.label_reboot_needed = QLabel(translate('Reboot needed'))
         self.layout.addRow(self.label_font_size, self.font_size)
+        self.layout.addRow(self.label_reboot_needed)
 
         self.widget.setLayout(self.layout)
 

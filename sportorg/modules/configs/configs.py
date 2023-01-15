@@ -81,7 +81,7 @@ class Config(metaclass=Singleton):
                 'autosave_interval': 0,
                 'logging_level': 'INFO',
                 'log_window_row_count': 1000,
-                'font_size': 'normal',
+                'font_size': '',
             }),
             ConfigFile.SOUND: Configurations({
                 'enabled': False,
@@ -154,6 +154,10 @@ class Config(metaclass=Singleton):
             self.configuration.set(
                 'current_locale',
                 self.parser.get(ConfigFile.LOCALE, 'current', fallback='ru_RU'),
+            )
+            self.configuration.set(
+                'font_size',
+                self.parser.get(ConfigFile.CONFIGURATION, 'font_size', fallback='normal'),
             )
         except Exception as e:
             logging.exception(e)

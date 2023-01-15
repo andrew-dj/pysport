@@ -59,9 +59,9 @@ from sportorg.models.constant import get_font_size, get_font_size_value
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
-
-if Config().configuration.get('font_size') == 'big':
-    font_size = get_font_size_value(Config().configuration.get('font_size'))
+Config().read()
+if Configuration().configuration.get('font_size'):
+    font_size = get_font_size_value(Configuration().configuration.get('font_size'))
     os.environ['QT_FONT_DPI'] = str(font_size)
 else:
     os.environ['QT_FONT_DPI'] = ''
@@ -124,6 +124,7 @@ class MainWindow(QMainWindow):
             self.conf_read()
         except Exception as e:
             logging.error(e)
+
         self._set_style()
         self._setup_ui()
         self._setup_menu()

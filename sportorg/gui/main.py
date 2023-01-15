@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from multiprocessing import freeze_support
 from platform import system as platform
 from PySide2.QtWidgets import QApplication
@@ -25,6 +25,7 @@ class Application(metaclass=Singleton):
 
 
     def get_main_window(self):
+
         return self.main_window
 
     def run(self):

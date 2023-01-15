@@ -184,7 +184,7 @@ def get_countries():
     ]
 
 
-font_size_dict = {'normal': 60, 'big': 192}
+font_size_dict = {'Tiny': 60, 'Normal': 70, 'Big': 90, 'Huge': 120}
 
 
 def get_font_size():
@@ -192,7 +192,8 @@ def get_font_size():
 
 
 def get_font_size_value(key):
-    if font_size_dict.get(key):
+    print(key)
+    if key in font_size_dict.keys():
         return font_size_dict.get(key)
     return font_size_dict.get('normal')
 
