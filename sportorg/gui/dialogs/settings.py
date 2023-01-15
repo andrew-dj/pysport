@@ -17,6 +17,7 @@ from sportorg.common.audio import get_sounds
 from sportorg.gui.global_access import GlobalAccess
 from sportorg.gui.utils.custom_controls import AdvComboBox, AdvSpinBox
 from sportorg.language import get_languages, translate
+from sportorg.models.constant import get_font_size, get_font_size_value
 from sportorg.models.memory import (
     add_race,
     copy_race,
@@ -73,9 +74,12 @@ class MainTab(Tab):
         self.item_save_in_utf8.setChecked(Config().configuration.get('save_in_utf8', False))
         self.layout.addRow(self.item_save_in_utf8)
 
-        #self.item_alpine_skiing_mode = QCheckBox(translate('Alpine skiing mode'))
-        #self.item_alpine_skiing_mode.setChecked(Config().configuration.get('alpine_skiing_mode'))
-        #self.layout.addRow(self.item_alpine_skiing_mode)
+        self.label_font_size = QLabel(translate('Font size'))
+        self.font_size = AdvComboBox()
+        self.font_size.addItems(get_font_size())
+        self.font_size.setCurrentText(
+            Config().configuration.get('font_size', 'medium'))
+        self.layout.addRow(self.label_font_size, self.font_size)
 
         self.widget.setLayout(self.layout)
 
@@ -85,6 +89,7 @@ class MainTab(Tab):
         Config().configuration.set(
             'open_recent_file', self.item_open_recent_file.isChecked()
         )
+        Config().configuration.set('font_size', self.font_size.currentText())
 
         if(bool(Config().configuration.get('show_toolbar')) != self.item_show_toolbar.isChecked()):
             if( self.item_show_toolbar.isChecked()):

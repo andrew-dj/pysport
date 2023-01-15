@@ -16,6 +16,7 @@ from sportorg.gui.dialogs.group_edit import GroupEditDialog
 from sportorg.gui.dialogs.organization_edit import OrganizationEditDialog
 from sportorg.gui.dialogs.person_edit import PersonEditDialog
 from sportorg.gui.global_access import GlobalAccess
+from sportorg.modules.configs.configs import Config
 from sportorg.models.constant import RentCards
 from sportorg.models.memory import (
     NotEmptyException,
@@ -54,10 +55,20 @@ from sportorg.modules.sportiduino.sportiduino import SportiduinoClient
 from sportorg.modules.telegram.telegram import telegram_client
 from sportorg.modules.teamwork import Teamwork, ObjectTypes
 from sportorg.modules.live.live import LiveClient
+from sportorg.models.constant import get_font_size, get_font_size_value
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
-#os.environ['QT_FONT_DPI'] = '196'
+
+if Config().configuration.get('font_size') == 'big':
+    font_size = get_font_size_value(Config().configuration.get('font_size'))
+    os.environ['QT_FONT_DPI'] = str(font_size)
+else:
+    os.environ['QT_FONT_DPI'] = ''
+    print(get_font_size_value(Config().configuration.get('font_size')))
+    #debug system environments
+    # for name, value in os.environ.items():
+    #     print("{0}: {1}".format(name, value))
 
 
 class ConsolePanelHandler(logging.Handler):
@@ -848,9 +859,9 @@ class MainWindow(QMainWindow):
 
     def menu_active_hint(self):
         if platform() == 'Darwin':
-            if self.firstrun <= 1:
+            if self.firstrun < 1:
                 subprocess.call(["/usr/bin/osascript", "-e",
                                  'tell app "Finder" to set frontmost of process "Finder" to true'])
                 subprocess.call(["/usr/bin/osascript", "-e",
-                                 'tell app "Finder" to set frontmost of process "python" to true'])
+                                 'tell app "Finder" to set frontmost of process "Python" to true'])
                 self.firstrun += 1
