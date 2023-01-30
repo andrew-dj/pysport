@@ -61,23 +61,23 @@ class LiveDialog(QDialog):
         self.item_result_sending.setChecked(True)
         self.layout.addRow(self.item_result_sending)
 
-        self.item_cp_sending = QCheckBox(translate('Online CP sending'))
-        self.item_result_sending.setChecked(True)
+        self.item_cp_sending = QCheckBox(translate('Two heats is planned'))
+        self.item_result_sending.setChecked(False)
         self.layout.addRow(self.item_cp_sending)
         self.item_cp_sending.setChecked(False)
 
-        self.online_cp_box = QGroupBox(translate('Online CP settings'))
+        self.online_cp_box = QGroupBox(translate('Two heats settings'))
         self.online_cp_layout = QFormLayout()
 
-        self.online_cp_from_splits = QCheckBox(translate('CP from splits'))
+        self.online_cp_from_splits = QCheckBox(translate('Send heats as splits'))
         self.online_cp_from_splits.setChecked(True)
-        self.online_cp_from_splits_codes = QLineEdit('90,91,92')
+        self.online_cp_from_splits_codes = QLineEdit('1,2')
         self.online_cp_from_splits_codes.setMaximumWidth(120)
-        self.online_cp_layout.addRow(self.online_cp_from_splits, self.online_cp_from_splits_codes)
+        # self.online_cp_layout.addRow(self.online_cp_from_splits, self.online_cp_from_splits_codes)
 
-        self.online_cp_from_finish = QCheckBox(translate('Finish as CP'))
-        self.online_cp_from_finish.setChecked(True)
-        self.online_cp_from_finish_code = AdvSpinBox(minimum=0, maximum=1024, value=80, max_width=60)
+        self.online_cp_from_finish = QCheckBox(translate('Send to Orgeo heat #'))
+        self.online_cp_from_finish.setChecked(False)
+        self.online_cp_from_finish_code = AdvSpinBox(minimum=1, maximum=2, value=1, max_width=60)
         self.online_cp_layout.addRow(self.online_cp_from_finish, self.online_cp_from_finish_code)
 
         self.online_cp_box.setLayout(self.online_cp_layout)
@@ -144,8 +144,8 @@ class LiveDialog(QDialog):
 
         live_results_enabled = obj.get_setting('live_results_enabled', True)
         live_cp_enabled = obj.get_setting('live_cp_enabled', False)
-        live_cp_code = obj.get_setting('live_cp_code', '10')
-        live_cp_split_codes = obj.get_setting('live_cp_split_codes', '91,91,92')
+        live_cp_code = obj.get_setting('live_cp_code', '1')
+        live_cp_split_codes = obj.get_setting('live_cp_split_codes', '1')
         live_cp_finish_enabled = obj.get_setting('live_cp_finish_enabled',  True)
         live_cp_splits_enabled = obj.get_setting('live_cp_splits_enabled', True)
 

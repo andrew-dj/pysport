@@ -464,6 +464,7 @@ class Result:
         self.speed = ''
         self.can_win_count = 0  # quantity of athletes who can win at current time
         self.final_result_time: Optional[OTime] = None  # real time, when nobody can win
+        self.lap_cross = None # Experimental feature
 
         self.card_number = 0
         self.splits = []  # type: List[Split]
@@ -518,6 +519,13 @@ class Result:
     def system_type(self) -> SystemType:
         pass
 
+    def lap_cross_count(self):
+        if self.get_penalty_time():
+            if self.get_penalty_time().to_msec() > 0:
+                return 2
+            return 1
+        return 0
+
     def to_dict(self):
         return {
             'object': self.__class__.__name__,
@@ -546,14 +554,15 @@ class Result:
             'result': self.get_result(),  # readonly
             'result_relay': self.get_result_relay(),
             'start_msec': self.get_start_time().to_msec(),  # readonly
-            'finish_msec': self.get_finish_time().to_msec(),  # readonly
+            'finish_msec': self.get_finish_otime().to_msec(),  # readonly
             'result_msec': self.get_result_otime().to_msec(),  # readonly
             'result_relay_msec': self.get_result_otime_relay().to_msec(),  # readonly
             'can_win_count': self.can_win_count,
             'final_result_time': self.final_result_time.to_str()
             if self.final_result_time
             else None,
-            'order': self.order
+            'order': self.order,
+            'lap_cross': self.lap_cross_count()
         }
 
     def update_data(self, data):
@@ -593,6 +602,8 @@ class Result:
                 split = Split()
                 split.update_data(item)
                 self.splits.append(split)
+        if 'lap_cross' in data:
+            self.lap_cross = int(data['lap_cross'])
 
     def clear(self):
         pass
@@ -685,6 +696,12 @@ class Result:
         ret_ms = self.get_finish_time().to_msec() - self.get_start_time().to_msec()
         ret_ms += self.get_penalty_time().to_msec()
         ret_ms -= self.get_credit_time().to_msec()
+        return OTime(msec=ret_ms).round(time_accuracy, TimeRounding[time_rounding])
+
+    def get_finish_otime(self):
+        time_accuracy = race().get_setting('time_accuracy', 0)
+        time_rounding = race().get_setting('time_rounding', 'math')
+        ret_ms = self.get_finish_time().to_msec()
         return OTime(msec=ret_ms).round(time_accuracy, TimeRounding[time_rounding])
 
     def get_result_otime_relay(self):

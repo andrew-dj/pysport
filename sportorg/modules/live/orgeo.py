@@ -1,6 +1,7 @@
 from re import subn
 
 from sportorg.utils.time import int_to_otime
+from sportorg.models.memory import Result
 
 RESULT_STATUS = [
     'NONE',
@@ -102,8 +103,9 @@ def _get_person_obj(data, race_data, result=None):
         'national_code': None,
         'world_code': None,
         'out_of_competition': data['is_out_of_competition'],
-        'start': round(data['start_time'] / 1000) if data['start_time'] else 0,
+        'start': 0
     }
+
     is_relay = group and group['__type'] == 3 or race_data['data']['race_type'] == 3
     if is_relay:
         # send relay fields only for relay events (requested by Ivan Churakoff)
@@ -112,13 +114,22 @@ def _get_person_obj(data, race_data, result=None):
     if result:
         obj['start'] = round(result['start_msec'] / 1000)
 
-        if is_relay:
-            obj['result_ms'] = round(
-                result['result_relay_msec'] / 10
-            )  # 1/100 sec - proprietary format
+        # if is_relay:
+        #     obj['result_ms'] = round(
+        #         result['result_relay_msec'] / 10
+        #     )  # 1/100 sec - proprietary format
+        if race_data['settings']["live_cp_finish_enabled"]:
+            penalty_time = result['penalty_time']
+            if race_data['settings']["live_cp_code"] == '1':
+                obj['lap_cross'] = 1
+                obj['result_ms'] = (result['finish_msec'] // 10)
+
+            if race_data['settings']["live_cp_code"] == '2':
+                obj['lap_cross'] = 2
+                obj['result_ms'] = round(result['result_msec'] // 10)
         else:
             obj['result_ms'] = round(
-                result['result_msec'] / 10
+                result['result_msec'] // 10
             )  # 1/100 sec - proprietary format
 
         obj['result_status'] = (
@@ -126,7 +137,6 @@ def _get_person_obj(data, race_data, result=None):
             if -1 < int(result['status']) < len(RESULT_STATUS)
             else 'OK'
         )
-
         if len(result['splits']):
             obj['splits'] = []
             splits = []
@@ -226,7 +236,7 @@ def create_online_cp(requests, url, data, race_data, log):
     race_data is Dict: Race
     """
 
-    if not race_data['settings']['live_cp_enabled']:
+    if race_data['settings']['live_cp_enabled']: # add 'not' to reverse
         return
 
     o = Orgeo(requests, url)
