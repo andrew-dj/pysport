@@ -64,7 +64,7 @@ class LiveDialog(QDialog):
         self.item_cp_sending = QCheckBox(translate('Two heats is planned'))
         self.item_result_sending.setChecked(True)
         self.layout.addRow(self.item_cp_sending)
-        self.item_cp_sending.setChecked(False)
+        self.item_cp_sending.setChecked(True)
 
         self.online_cp_box = QGroupBox(translate('Two heats settings'))
         self.online_cp_layout = QFormLayout()
