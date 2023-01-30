@@ -62,7 +62,7 @@ class LiveDialog(QDialog):
         self.layout.addRow(self.item_result_sending)
 
         self.item_cp_sending = QCheckBox(translate('Two heats is planned'))
-        self.item_result_sending.setChecked(False)
+        self.item_result_sending.setChecked(True)
         self.layout.addRow(self.item_cp_sending)
         self.item_cp_sending.setChecked(False)
 
@@ -76,7 +76,7 @@ class LiveDialog(QDialog):
         # self.online_cp_layout.addRow(self.online_cp_from_splits, self.online_cp_from_splits_codes)
 
         self.online_cp_from_finish = QCheckBox(translate('Send to Orgeo heat #'))
-        self.online_cp_from_finish.setChecked(False)
+        self.online_cp_from_finish.setChecked(True)
         self.online_cp_from_finish_code = AdvSpinBox(minimum=1, maximum=2, value=1, max_width=60)
         self.online_cp_layout.addRow(self.online_cp_from_finish, self.online_cp_from_finish_code)
 
