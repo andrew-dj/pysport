@@ -1,0 +1,15 @@
+<gridster [options]="options" style="background: #eee">
+  <gridster-item [item]="item" *ngFor="let item of dashboard">
+
+    <div class="widget-content" *ngIf="item.type == 'table'">
+      <app-table [columns]="item.attr.columns" [rows]="item.attr.rows"></app-table>
+    </div>
+    <div class="widget-content" *ngIf="item.type == 'map'">
+      <app-map></app-map>
+    </div>
+    <div class="widget-content" *ngIf="item.type == 'info'">
+      <app-info></app-info>
+    </div>
+
+  </gridster-item>
+</gridster>

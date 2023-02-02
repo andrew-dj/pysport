@@ -1,0 +1,16 @@
+# Use after docker-compose.yaml
+version: '2.1'
+
+services:
+  sportorg:
+    restart: "no"
+    image: sportorg/online:develop
+    build:
+      context: .
+      dockerfile: ./dockerfiles/develop/Dockerfile
+    volumes:
+    - ./:/go/src/github.com/sportorg/online
+    - /go/src/github.com/sportorg/online/web/node_modules/
+
+  database:
+    restart: "no"
