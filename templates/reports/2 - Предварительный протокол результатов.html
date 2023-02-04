@@ -479,8 +479,8 @@
             {key: 'year', title: 'ГР', size: 5},
             {key: 'qual', title: 'Разряд', size: 7},
             {key: 'bib', title: 'Номер', size: 6},
-            {key: 'penalty_laps', title: 'Первая попытка', size: 15, active: false},
-            {key: 'penalty_time', title: 'Вторая попытка', size: 15, active: false},
+            {key: 'penalty_laps', title: 'Первый заезд', size: 13, active: false},
+            {key: 'penalty_time', title: 'Второй заезд', size: 13, active: false},
             {key: 'result', title: 'Результат', size: 14},
             {key: 'result_relay', title: 'Ком. рез-т', size: 14},
             {key: 'diff', title: 'Отставание', size: 11},
@@ -705,7 +705,7 @@
             }
         },
         {
-            title: 'Первая попытка',
+            title: 'Первый заезд',
             value: Fields.isActive('penalty_laps'),
             change: function (checked) {
                 Fields.active('penalty_laps', checked);
@@ -713,7 +713,7 @@
             }
         },
         {
-            title: 'Вторая попытка',
+            title: 'Второй заезд',
             value: Fields.isActive('penalty_time'),
             change: function (checked) {
                 Fields.active('penalty_time', checked);

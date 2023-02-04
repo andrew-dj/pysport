@@ -56,9 +56,10 @@ class TelegramDialog(QDialog):
         self.help_text.setReadOnly(True)
         self.help_text.setText(
             """
-        Для первой попытки: {bib} - {name} - результат первой попытки: {result}
-        
-        Для второй попытки {bib} - {name} -  результат второй попытки: {penalty_time}, общее время: {result}
+        Для первого заезда: {bib} - {name} - результат первого заезда: {result}
+        Для второго заезда: {bib} - {name} -  результат второго заезда: {penalty_time}, общее время: {result}
+        Чтобы отображать текущее неокончательное место: {place}
+        Для отображения группы: {group}
             """
         )
         self.layout.addRow(self.help_text)

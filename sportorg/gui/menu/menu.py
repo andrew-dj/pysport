@@ -313,6 +313,7 @@ def menu_list():
                     'actions': [
                         {
                             'title': translate('Send results'),
+                            'icon': config.icon_dir('icon-telegram.png'),
                             'shortcut': 'Ctrl+T',
                             'tabs': [1],
                             'action': 'TelegramSendAction',
@@ -340,7 +341,7 @@ def menu_list():
                     'icon': config.icon_dir('stopwatch.svg'),
                     'action': 'TimekeepingSettingsAction',
                 },
-                {'title': translate('Teamwork'), 'action': 'TeamworkSettingsAction'},
+                # {'title': translate('Teamwork'), 'action': 'TeamworkSettingsAction'},
                 {
                     'title': translate('Teamwork'),
                     'icon': config.icon_dir('network.svg'),
@@ -358,6 +359,7 @@ def menu_list():
                 },
                 {
                     'title': translate('Telegram'),
+                    'icon': config.icon_dir('icon-telegram.png'),
                     'action': 'TelegramSettingsAction',
                 },
                 {

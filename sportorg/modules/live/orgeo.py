@@ -118,7 +118,7 @@ def _get_person_obj(data, race_data, result=None):
         #     obj['result_ms'] = round(
         #         result['result_relay_msec'] / 10
         #     )  # 1/100 sec - proprietary format
-        if race_data['settings']["live_cp_finish_enabled"]:
+        if race_data['settings']["live_cp_finish_enabled"] and race_data['settings']["live_cp_enabled"]:
             penalty_time = result['penalty_time']
             if race_data['settings']["live_cp_code"] == '1':
                 obj['lap_cross'] = 1
@@ -160,6 +160,7 @@ def _get_person_obj(data, race_data, result=None):
                     start_time = result['start_msec']
                 current_split['time'] = round((end_time - start_time) / 1000)
                 obj['splits'].append(current_split)
+    print(obj)
     return obj
 
 
