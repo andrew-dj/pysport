@@ -7,7 +7,7 @@
 
 ![Bibprintout sportorg](img/logo.png)
 
-# PySport v1.6.1 (SportOrg Fork)
+# PySport v1.6.2 (SportOrg Fork)
 
 Especially reconfigured for alpine ski competition.
 - 
@@ -56,13 +56,8 @@ poetry run python SportOrg.pyw
 
 ## HiDPI issue
 
-`To fix small fonts on HiDPI displays run following in command line`
+`To fix small fonts on HiDPI displays set font zixe in settings
 
-```commandline
-setx QT_AUTO_SCREEN_SCALE_FACTOR "1"
-setx QT_AUTO_SCREEN_SCALE_FACTOR "1" /M
-setx QT_FONT_DPI "196"
-```
 
 ## Roadmap
 
