@@ -431,8 +431,11 @@
         var with0 = function (dd) {
             return (dd < 10 ? '0' + dd : dd) + '';
         };
+        var with00 = function (dd) {
+            return (dd < 100 ? '0' + dd : dd) + '';
+        };
 
-        return with0(with0(date.getMinutes()) + ':' + with0(date.getSeconds()) + '.' + with0(date.getMilliseconds()));
+        return with0(with0(date.getMinutes()) + ':' + with0(date.getSeconds()) + '.' + with00(date.getMilliseconds()));
     }
 
 

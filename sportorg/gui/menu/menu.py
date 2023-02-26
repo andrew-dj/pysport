@@ -9,7 +9,6 @@ def menu_list():
             'actions': [
                 {
                     'title': translate('New'),
-                    'shortcut': 'Ctrl+N',
                     'icon': config.icon_dir('file.svg'),
                     'action': 'NewAction',
                 },
@@ -116,7 +115,7 @@ def menu_list():
                 {
                     'title': translate('Add object'),
                     'tabs': list(range(5)),
-                    'shortcut': ['insert', 'i'],
+                    'shortcut': 'Ctrl+N',
                     'icon': config.icon_dir('add.svg'),
                     'action': 'AddObjectAction',
                 },

@@ -181,10 +181,11 @@ def get_countries():
         'South Africa',
         'Jamaica',
         'Japan',
+        'Россия',
     ]
 
 
-font_size_dict = {'Tiny': 60, 'Normal': 70, 'Big': 90, 'Huge': 120}
+font_size_dict = {'Tiny': 60, 'Normal': 70, 'Big': 90, 'Huge': 120, 'HiDPI': 192}
 
 
 def get_font_size():
@@ -196,6 +197,7 @@ def get_font_size_value(key):
     if key in font_size_dict.keys():
         return font_size_dict.get(key)
     return font_size_dict.get('normal')
+
 
 def get_regions():
     return Regions().get_all()
@@ -216,6 +218,19 @@ def get_race_groups():
         logging.error(str(e))
         return get_groups()
 
+
+def get_race_groups_year(year=None):
+    ret = ['']
+    try:
+        for i in race().groups:
+            if i.name:
+                if year:
+                    if i.min_year <= year <= i.max_year:
+                        ret.append(i.name)
+        return ret
+    except Exception as e:
+        logging.error(str(e))
+        return get_groups()
 
 def get_teams():
     return ['']

@@ -13,7 +13,7 @@ from sportorg.gui.dialogs.dialog import (
 )
 from sportorg.gui.global_access import GlobalAccess
 from sportorg.language import translate
-from sportorg.models.constant import get_names, get_race_groups, get_race_teams
+from sportorg.models.constant import get_names, get_race_groups_year, get_race_groups, get_race_teams
 from sportorg.models.memory import Limit, Organization, Qualification, find, race
 from sportorg.models.result.result_calculation import ResultCalculation
 from sportorg.modules.configs.configs import Config
@@ -50,21 +50,6 @@ class PersonEditDialog(BaseDialog):
                 key='name',
                 items=get_names(),
             ),
-            AdvComboBoxField(
-                title=translate('Group'),
-                object=person,
-                key='group',
-                id='group',
-                items=get_race_groups(),
-            ),
-            LabelField(id='group_info'),
-            AdvComboBoxField(
-                title=translate('Team'),
-                object=person,
-                key='organization',
-                id='organization',
-                items=get_race_teams(),
-            ),
             DateField(
                 title=translate('Birthday'),
                 object=person,
@@ -79,6 +64,21 @@ class PersonEditDialog(BaseDialog):
                 id='year',
                 minimum=0,
                 maximum=date.today().year,
+            ),
+            AdvComboBoxField(
+                title=translate('Group'),
+                object=person,
+                key='group',
+                id='group',
+                items=get_race_groups(),
+            ),
+            LabelField(id='group_info'),
+            AdvComboBoxField(
+                title=translate('Team'),
+                object=person,
+                key='organization',
+                id='organization',
+                items=get_race_teams(),
             ),
             AdvComboBoxField(
                 title=translate('Qualification'),
@@ -169,6 +169,8 @@ class PersonEditDialog(BaseDialog):
     def parse_qual(self, text: str):
         return Qualification.get_qual_by_name(text)
 
+    def get_race_groups_year_(self):
+        return get_race_groups_year(self.fields['year'].q_item.value())
     def on_year_finished(self):
         """
         Convert 2 digits of year to 4
@@ -181,11 +183,14 @@ class PersonEditDialog(BaseDialog):
         """
         widget = self.sender()
         year = widget.value()
+        self.year = 0
         if 0 < year < 100:
             cur_year = date.today().year
             new_year = cur_year - cur_year % 100 + year
+            self.year = new_year
             if new_year > cur_year:
                 new_year -= 100
+                self.year = new_year
             widget.setValue(new_year)
 
     def is_items_ok(self):
